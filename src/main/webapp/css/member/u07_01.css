@@ -1,0 +1,65 @@
+.item_con{
+    text-align: center;
+}
+.item_row{
+    display: flex;
+    flex-direction: row;
+}
+
+.items_box{
+    border-radius: 20px;
+    border: 1px solid gray;
+    display: block;
+    width: 50%;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+.items{
+    border-bottom: 1px solid gainsboro;
+    padding: 10px 0;
+}
+.items_title{
+    font-weight: bold;
+}
+.items_text{
+
+}
+button{
+    cursor: pointer;
+}
+.btn_box{
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.btn_box button{
+    margin: 0 20px;
+    width: 20%;
+    border-radius: 20px;
+}
+.update_btn{
+    border: 1px solid gray;
+}
+.update_btn:hover{
+    background-color: ghostwhite;
+}
+
+.delete_btn{
+    background-color: #FFC898;
+    border: 1px solid #FFC898;
+}
+.delete_btn:hover{
+    background-color: #e75152;
+    color: white;
+}
+
+@media(max-width: 1030px){
+
+    .item_row{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -1,0 +1,110 @@
+.main_box{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.item_con{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.item_box{
+    width: 50%;
+    margin-right: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: white;
+}
+.member_name{
+    text-align: center;
+    margin-bottom: 10px;
+}
+.member_name span{
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.items{
+    box-sizing: border-box;
+    margin: 0;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0;
+    border-collapse: collapse;
+    border: 1px solid gray;
+    text-align: left;
+}
+.items_title{
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    padding: 0 5px;
+    background-color: #d3e8e1;
+    border: 1px solid #d3e8e1;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    word-break: break-all;
+    font-size: 18px;
+}
+.items_text{
+    display:inline;
+    text-align: left;
+    padding: 0 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+    word-break: break-all;
+}
+
+.hospital_info{
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.btn_box{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+.btn_box button{
+    cursor: pointer;
+    margin: 0 10px;
+}
+.submit_btn{
+    margin: 0 20px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: #3c485e;
+    color: white;
+    border: 1px solid #3c485e;
+}
+.submit_btn:hover{
+    background-color: white;
+    color: #55b1df;
+    border: 1px solid #55b1df;
+    transition: all .2s ease;
+}
+.submit_btn:focus{
+    outline: none;
+}
+
+
+
+@media(max-width: 1030px){
+    .item_con{
+        flex-direction: column;
+        align-items: center;
+    }
+    .items_title{
+        width: 48%;
+        font-size: 16px;
+    }
+    .items_text{
+        font-size: 14px;;
+    }
+    .submit_btn{
+        font-size: 14px;
+    }
+}
