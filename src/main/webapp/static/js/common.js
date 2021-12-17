@@ -5,7 +5,8 @@ var _window = $(window),
     menu_bar = $('.menu_bar'),
     account_menu = $('.account-btn'),
     singup_btn = $('.singup_btn'),
-    login_btn = $('.login_btn');
+    login_btn = $('.login_btn'),
+    logout_btn = $('.logout_btn');
 
 _window.on('scroll',function(){
     if(_window.scrollTop() > 20){
@@ -15,6 +16,7 @@ _window.on('scroll',function(){
         account_menu.addClass('transform');
         singup_btn.addClass('transform');
         login_btn.addClass('transform');   
+        logout_btn.addClass('transform');   
     }
     else{
         _header.removeClass('transform');   
@@ -23,21 +25,22 @@ _window.on('scroll',function(){
         account_menu.removeClass('transform');
         singup_btn.removeClass('transform');
         login_btn.removeClass('transform');  
+        logout_btn.removeClass('transform');  
     }
     
   });
 
+  let nav_item = document.querySelectorAll('.menu_bar li');
   let currentMenu;
-  for(let item of menu_bar){
-    item.addEventListener('click',function(e){
-      e.preventDefault();
-          if(e.target.className.indexOf('active') == -1){
-            activeMenu(e.target);
+  for(let item of nav_item){
+    console.log(item);
+    item.addEventListener('click',function(){
+          if(item.className.indexOf('active') == -1){
+            activeMenu(item);
           }else{
-            removeActiveMenu(e.target);
+            removeActiveMenu(item);
           }
-          console.log(e.target);
-          location.href = e.target.href;
+          // location.href = e.target.href;
       });
   }
 _window.trigger('scroll');
@@ -79,3 +82,9 @@ function removeActiveMenu(element){
   element.parentElement.classList.remove('menu_li_active');
 }
 
+function maxLengthCheck(object){
+  if (object.value.length > object.maxLength){
+    object.value = object.value.slice(0, object.maxLength);
+  }
+  object.value= object.value.replace('-','');
+}

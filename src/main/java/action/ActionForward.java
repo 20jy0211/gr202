@@ -1,8 +1,16 @@
 package action;
 
 public class ActionForward{
+	
+	private static ActionForward forward = new ActionForward();
 	private String path = null;
 	private boolean redirect = false;
+	
+	public static ActionForward getInstance(){
+		return forward;
+	}
+	
+	ActionForward() {}
 	
 	public String getPath() {
 		return path;

@@ -45,10 +45,24 @@
     transition: all .2s ease;
     font-size: 14px;
 }
+
+.insurance input[type="number"], .insurance input[type="text"]{
+    width: 20%;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    transition: all .2s ease;
+    font-size: 14px;
+}
+
+.insurance .items_title{
+    width: 100%;
+}
 .items input[type="text"]:focus,
 .items input[type="email"]:focus,
 .child_num input[type="number"]:focus,
-.brith input[type="number"]:focus{
+.brith input[type="number"]:focus,
+.insurance input[type="number"]:focus{
     border: 1px solid #55b1df;
     border-radius: 10px;
     transition: all .2s ease;
@@ -63,10 +77,6 @@ button{
 }
 .add_btn{
     float: right;
-}
-footer{
-    position: absolute;
-    bottom: 0;
 }
 
 
@@ -103,6 +113,9 @@ footer{
     .add_btn{
         float:none;
         margin-left: 30%;
+    }
+    .insurance input[type="number"], .insurance input[type="text"]{
+        width: 10%;
     }
     
 }

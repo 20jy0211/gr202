@@ -11,28 +11,26 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
-import customer.action.CustomerJoinAction;
-import customer.action.CustomerLoginAction;
-import customer.action.CustomerLogoutAction;
+import action.member.U02;
 
-@WebServlet("/CustomerController")
+@WebServlet("/MemberController")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	// ポリモーフィズムのため action
 	private Map<String, Action> contList = new HashMap<>();
-
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		/*
-			한 번 Servlet 객체가 생성되었기 때문에, Servlet 객체는 메모리에 저장되어 있습니다.
-			그래서 이번에는 init() 메서드를 호출하지 않고, 곧바로 service() 메서드를 호출합니다.
+		 	一回 Servletインスタンスが生産されたら Servletインスタンスはメモリに保存されている。
+		 	それで、初めて実行する時だけ init()メソッドを呼び出すことで、処理速度が早くなる。
 		*/
 		super.init(config);
-		contList.put("CustomerJoin",  new CustomerJoinAction());
-		contList.put("CustomerLogin",  new CustomerLoginAction());
-		contList.put("CustomerLogout",  new CustomerLogoutAction());
+		contList.put("U02",  new U02());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,14 +50,14 @@ public class MemberController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher dispatcher;
 		String command = request.getParameter("action");
-		String viewPage = request.getParameter("viewPage");
+		String view = request.getParameter("view");
+		HttpSession session = request.getSession();
 		// パスを決めるため forward
-		ActionForward forward = new ActionForward();
-		// ポリモーフィズムのため action
-		Action action = null;
-		String url = "/WEB-INF/views/customer/";
+		ActionForward forward = ActionForward.getInstance();
+		
+		String path = "/WEB-INF/view/member/";
 		try {
-			if(viewPage == null && viewPage.equals("")) {
+			if(view == null && view.equals("")) {
 				forward = contList.get(command).execute(request, response);
 				if (forward.isRedirect()) {
 					dispatcher = request.getRequestDispatcher(forward.getPath());
@@ -68,10 +66,10 @@ public class MemberController extends HttpServlet {
 					response.sendRedirect(forward.getPath());
 				}
 			}else {
-				if(viewPage.equals("index")) {
-					forward.setPath(viewPage+".jsp");
+				if(view.equals("index")) {
+					forward.setPath(view+".jsp"); // webapp/index
 				}else {
-					forward.setPath(url+viewPage+".jsp");
+					forward.setPath(path+view+".jsp"); // webapp/web-inf/view/member/
 				}
 				dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);

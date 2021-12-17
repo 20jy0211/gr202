@@ -1,25 +1,23 @@
-main{
-    padding-top: 15px;
-}
-
 .notice_con{
     box-sizing: border-box;
     width: 100%;
-    padding:0 20px;
+    padding:0 1rem;
     margin: 0;
     text-align: left;
     background-color: whitesmoke;
     justify-content: center;
     display: flex;
+    font-size: 0.8rem;
 }
 .notice_con span{
     color: black;
-    margin-right: 20px;
+    margin-right: 1rem;
 }
 .notice_con a{
     color:gray;
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 1%;
+    font-size: 2%;
 }
 .notice_con a:hover{
     color: #FFC898;
@@ -35,7 +33,15 @@ main{
     align-items: flex-start;
     justify-content: center;
 }
-
+.qr_item{
+    margin-right: 10px;
+    background-color: white;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.item_box img{
+    width: 80%;
+}
 .wrap_info_con{
     background-color: white;
     text-align: center;
@@ -76,17 +82,19 @@ main{
 .menu_items a:hover {
     text-decoration: underline;
 }
+.qr_text{
+    text-align: center;
+}
 .item_title{
     font-weight: bold;
 }
 .menu_item_box{
     width: 50%;
     background-color: #d3e8e1;
-    margin-right: 10px;
+    margin: 0 1%;
     margin-bottom: 10px;
     padding: 10px 0;
 }
-
 footer{
     position: absolute;
     bottom: 0;
@@ -110,7 +118,25 @@ footer{
     .manual_title{
         font-size: 14px;
     }
-    main{
-        padding-top: 15px;
+
+    .item_box img{
+        width: 60%;
+    }
+    
+    
+}
+
+@media(max-width: 550px){
+    .menu_con{
+        width: 100%;
+    }
+    .menu_items{
+        padding: 0 1%;
+    }
+    .menu_item_box p, .menu_item_box a{
+        font-size: 0.8rem;
+    }
+    .notice_con{
+        display:none;
     }
 }

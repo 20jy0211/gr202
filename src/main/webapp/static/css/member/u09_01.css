@@ -11,6 +11,13 @@
     background-color: white;
     padding-bottom: 10px;
 }
+
+.main_item p{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 0;
+}
+
 .item_con{
     padding-top: 25px;
     display:flex;
@@ -47,7 +54,7 @@
     text-align: left;
 }
 .qr_btn_box{
-    padding: 80px 10px;
+    padding: 20px 10px;
     text-align: center;
 }
 .info_text{
@@ -106,9 +113,6 @@ footer{
     }
     .qr_btn{
         font-size: 16px;
-    }
-    footer{
-        position: unset;
     }
     
 }
