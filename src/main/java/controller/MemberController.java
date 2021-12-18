@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
+import action.common.U04;
 import action.member.U02;
 
 @WebServlet("/MemberController")
@@ -31,6 +32,7 @@ public class MemberController extends HttpServlet {
 		*/
 		super.init(config);
 		contList.put("U02",  new U02());
+		contList.put("U04",  new U04());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
