@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <header class="site-header">
         <div class="logo_box">
-            <a class="logo_text" href="${pageContext.request.contextPath}/index.jsp">COCO薬局</a>
+            <a class="logo_text" href="PhamacyController?view=index">COCO薬局</a>
         </div>
         <nav>
             <ul class="menu_bar">
-                <li><a href="${pageContext.request.contextPath}/index.jsp" >ホーム</a></li>
+                <li><a href="PhamacyController?view=index" >ホーム</a></li>
                 <li><a href="PhamacyController?view=u15_01">薬情報一覧</a></li>
                 <li><a href="PhamacyController?view=u10_01_pharmacy">会員検索</a></li>
             </ul>
@@ -20,7 +20,7 @@
                     <li>
                         <a href="PhamacyController?view=u02_01">ログアウト</a>
                     </li>
-                    <li><a href="${pageContext.request.contextPath}/index.jsp" >ホーム</a></li>
+                    <li><a href="PhamacyController?view=index" >ホーム</a></li>
 	                <li><a href="PhamacyController?view=u15_01">薬情報一覧</a></li>
 	                <li><a href="PhamacyController?view=u10_01_pharmacy">会員検索</a></li>
                 </ul>

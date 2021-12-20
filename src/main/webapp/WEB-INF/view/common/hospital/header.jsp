@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <header class="site-header">
     <div class="logo_box">
-        <a class="logo_text" href="${pageContext.request.contextPath}/index.jsp">COCO薬局</a>
+        <a class="logo_text" href="HospitalController?view=index">COCO薬局</a>
     </div>
     <nav>
         <ul class="menu_bar">

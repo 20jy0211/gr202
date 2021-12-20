@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <header class="site-header">
     <div class="logo_box">
-        <a class="logo_text" href="${pageContext.request.contextPath}/index.jsp">COCO薬局</a>
+        <a class="logo_text" href="MemberController?view=index">COCO薬局</a>
     </div>
     <nav>
         <ul class="menu_bar">
-            <li><a href="${pageContext.request.contextPath}/index.jsp">ホーム</a></li>
+            <li><a href="MemberController?view=index">ホーム</a></li>
             <li><a href="MemberController?view=u08_01">薬歴</a></li>
             <li><a href="MemberController?view=u09_01">会員QRコード</a></li>
             <li><a href="MemberController?view=u07_01">子供情報</a></li>
@@ -22,7 +22,7 @@
                 <li>
                     <a href="MemberController?view=u04.jsp">ログアウト</a>
                 </li>
-                <li><a href="${pageContext.request.contextPath}/index">ホーム</a></li>
+                <li><a href="MemberController?view=index">ホーム</a></li>
 	            <li><a href="MemberController?view=u08_01">薬歴</a></li>
 	            <li><a href="MemberController?view=u09_01">会員QRコード</a></li>
 	            <li><a href="MemberController?view=u07_01">子供情報</a></li>
