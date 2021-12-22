@@ -41,11 +41,24 @@
     transition: all .2s ease;
     
 }
-.items input[type="text"]:focus{
+.items input[type="text"]:focus,
+.items textarea:focus{
     border: 1px solid #55b1df;
     border-radius: 10px;
     transition: all .2s ease;
     outline: none;
+}
+.items textarea{
+    box-sizing: border-box;
+     width: 100%;
+     padding: 10px;
+     resize: none;
+     outline: none;
+     border: 1px solid gray;
+     border-radius: 10px;
+     transition: all .2s ease;
+     font-size: 18px;
+     height: 200px;
 }
 
 .items select{
@@ -100,6 +113,9 @@ footer{
     }
     .items select{
         font-size: 14px;
+    }
+    .items textarea{
+        font-size: 16px;
     }
     
 }

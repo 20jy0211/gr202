@@ -17,6 +17,8 @@ public class U02 implements Action {
 		ActionForward forward = ActionForward.getInstance();
 		PrintWriter writer = response.getWriter(); 
 		
+		
+		
 		if(member.getUserID().equals("") || member.getUserPassword().equals("") || member.getUserName().equals("") ||
 				member.getUserEmail().equals("")) {
 			writer.println("<script>alert('記入してない所があります。'); history.back()';</script>"); 

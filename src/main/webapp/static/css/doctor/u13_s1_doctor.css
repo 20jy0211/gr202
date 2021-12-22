@@ -60,7 +60,7 @@
 }
 
 .items_req input[type="number"]{
-     width: 12%;
+     width: 13%;
      padding: 10px;
      border: 1px solid gray;
      border-radius: 10px;
@@ -274,12 +274,14 @@
      }
      .items input[type="text"],
      .items_req input[type="text"],
-     .items_req input[type="number"],
      .items_medicine input[type="number"]{
          width: 70%;
          height: 10px;
          font-size: 14px;
          text-align: center;
+     }
+     .items_req input[type="number"]{
+         width: 22%;
      }
      
      .items_medicine input[type="text"]{
