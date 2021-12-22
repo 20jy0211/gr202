@@ -15,7 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
+<<<<<<< HEAD
 import action.common.U04;
+=======
+import action.member.U01;
+>>>>>>> refs/heads/main
 import action.member.U02;
 
 @WebServlet("/MemberController")
@@ -31,8 +35,13 @@ public class MemberController extends HttpServlet {
 		 	それで、初めて実行する時だけ init()メソッドを呼び出すことで、処理速度が早くなる。
 		*/
 		super.init(config);
+<<<<<<< HEAD
 		contList.put("U02",  new U02());
 		contList.put("U04",  new U04());
+=======
+		contList.put("u01",  new U01());
+		contList.put("u02",  new U02());
+>>>>>>> refs/heads/main
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +68,7 @@ public class MemberController extends HttpServlet {
 		
 		String path = "/WEB-INF/view/member/";
 		try {
-			if(view == null && view.equals("")) {
+			if(view == null || "".equals(view)) {
 				forward = contList.get(command).execute(request, response);
 				if (forward.isRedirect()) {
 					dispatcher = request.getRequestDispatcher(forward.getPath());
@@ -68,7 +77,7 @@ public class MemberController extends HttpServlet {
 					response.sendRedirect(forward.getPath());
 				}
 			}else {
-				if(view.equals("index")) {
+				if("index".equals(view)) {
 					forward.setPath(view+".jsp"); // webapp/index
 				}else {
 					forward.setPath(path+view+".jsp"); // webapp/web-inf/view/member/

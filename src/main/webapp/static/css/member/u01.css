@@ -35,10 +35,10 @@
     text-shadow: 1px 1px 1px #555555;
 }
 
-#phone{
+.phone{
     width: 20%;
 }
-#zip_code{
+.zip_code{
     width: 30%;
 }
 
@@ -93,10 +93,10 @@ strong{
 #hoken1, #hoken2{
     width: 30%;
 }
-.birthday input[type="text"]{
+.birthday input[type="number"]{
     width: 20%;
 }
-.postnum input[type="text"]{
+.postnum input[type="number"]{
     width: 20%;
 }
 

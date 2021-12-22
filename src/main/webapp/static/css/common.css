@@ -175,6 +175,7 @@ nav ul li .menu_a_active{
     color:black;
     transition: all 0.5s;
 }
+
 .account-btn {
     position: fixed;
     top: 20px;
@@ -195,7 +196,7 @@ nav ul li .menu_a_active{
     transition: all 0.5s;
 }
 
-/*X繧定｡ｨ遉ｺ縺吶ｋ*/
+/*Xを表示する*/
 .account-btn span,
 .account-btn span:before,
 .account-btn span:after {
@@ -233,12 +234,12 @@ nav ul li .menu_a_active{
 #account-btn-check {
     display: none;
 }
-/*繝｡繝九Η繝ｼ繧ｪ繝ｼ繝励Φ譎ゅ�ｯ逵溘ｓ荳ｭ縺ｮ邱壹ｒ騾乗�弱↓縺吶ｋ*/
+/*メニューオープン時は真ん中の線を透明にする*/
 #account-btn-check:checked ~ .account-btn span {
     background-color: rgba(255, 255, 255, 0);
     cursor: pointer;
 }
-/*X縺ｮ邱�*/
+/*Xの線*/
 #account-btn-check:checked ~ .account-btn span::before {
     bottom: 0;
     transform: rotate(45deg);
@@ -265,7 +266,7 @@ nav ul li .menu_a_active{
 }
 
 #account-btn-check:checked ~ .account-content {
-    left: 0;/*繝｡繝九Η繝ｼ繧堤判髱｢蜀�縺ｸ*/
+    left: 0;/*メニューを画面内へ*/
 }
 .account-content ul {
     padding: 70px 10px 0;
