@@ -1,12 +1,14 @@
 package model;
 
+import java.sql.Date;
+
 public class MemberBean {
 	private int m_num;
 	private String m_email;
 	private String m_pw;
 	private String m_name;
 	private String m_kana;
-	private String m_brith;
+	private Date m_brith;
 	private String m_tel;
 	private String m_gender;
 	private String m_zipcode;
@@ -21,10 +23,9 @@ public class MemberBean {
 
 	public MemberBean() {}
 
-	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, String m_brith,
-			String m_tel, String m_gender, String m_zipcode, String m_address, int m_question_num, String m_i_num,
+	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, Date m_brith, String m_tel,
+			String m_gender, String m_zipcode, String m_address, int m_question_num, String m_i_num,
 			String m_i_expiry_date, String m_i_mark, String m_qr_num, boolean m_auth, boolean m_leave) {
-		super();
 		this.m_num = m_num;
 		this.m_email = m_email;
 		this.m_pw = m_pw;
@@ -84,13 +85,16 @@ public class MemberBean {
 		this.m_kana = m_kana;
 	}
 
-	public String getM_brith() {
+
+	public Date getM_brith() {
 		return m_brith;
 	}
 
-	public void setM_brith(String m_brith) {
+
+	public void setM_brith(Date m_brith) {
 		this.m_brith = m_brith;
 	}
+
 
 	public String getM_tel() {
 		return m_tel;

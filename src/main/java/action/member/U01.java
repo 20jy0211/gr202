@@ -57,8 +57,9 @@ public class U01 implements Action {
 		String patternString = "^[A-Za-z0-9]{0,50}$";
 
 		//email
-		if (str.get(0).matches(patternEmail))
+		if (str.get(0).matches(patternEmail)) {
 			writer.println("<script>alert('正しいメールアドレスを入力してください。(50文字制限)');</script>");
+		}
 
 		//input text type
 		for (String ary : str) {

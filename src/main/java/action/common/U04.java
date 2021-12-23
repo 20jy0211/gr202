@@ -11,10 +11,13 @@ public class U04 implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ActionForward forward = ActionForward.getInstance();
+		forward.setRedirect(true);
+		forward.setPath("index.jsp");
 		HttpSession session = request.getSession();
         session.invalidate();
  
-		return null;
+		return forward;
 	}
 
 }
