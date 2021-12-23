@@ -5,9 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import customer.model.CustomerBean;
+import customer.model.Exception;
+import customer.model.RuntimeException;
+import customer.model.String;
 import model.MemberBean;
 import util.Close;
 import util.DBconnection;
+import util.SHA256;
 
 public class MemberDAO {
 	public boolean join(MemberBean member) throws SQLException {
@@ -53,5 +58,93 @@ public class MemberDAO {
 				throw new RuntimeException(e.getMessage());
 			}
 		} // end try~catch
+	} // end insertMember()
+	
+	public boolean login(String customerEmail, String customerPw) {
+		String SQL = "SELECT customerPw FROM customer WHERE customerEmail = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, customerEmail);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				//ユーザが書いたpwとDBのpwと同じだったらログイン成功
+				if(rs.getString(1).equals(customerPw)) {
+					return true;
+				}
+			}
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		} // end try~catch
+		return false;
+	}
+	
+	public CustomerBean getCustomer(String customerEmail)  {
+		String SQL = "SELECT customerEmail,customerPw FROM customer WHERE customerEmail = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, customerEmail);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				CustomerBean customer = new CustomerBean();
+				customer.setCustomerEmail(rs.getNString(1));
+				customer.setCustomerPw(rs.getNString(2));
+				return customer;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		// Connection, PreparedStatement를 닫는다.
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		} // end try~catch
+		return null;
+	} // end insertMember()
+	
+	public boolean checkCustomerEmail(String customerEmail) {
+		String SQL = "SELECT customerEmail FROM customer WHERE customerEmail = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			customerEmail = SHA256.getEncrypt(customerEmail);
+			pstmt.setString(1, customerEmail);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return false;
+			}else {
+				return true;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		// Connection, PreparedStatement를 닫는다.
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		} // end try~catch
+		return true;
 	} // end insertMember()
 }
