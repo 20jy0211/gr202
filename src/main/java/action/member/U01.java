@@ -49,7 +49,7 @@ public class U01 implements Action {
 		String q_smoke = request.getParameter("smoke");
 		String q_pregnacy = request.getParameter("pregnacy");
 		String q_allergy = request.getParameter("allregy");
-		
+
 		//形に当てはまるとtrueを返却する exam) email = dddd@dddd.com => true testパッケージを参考。
 		String patternNum = "^[0-9]*$";
 		String patternEmail = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
