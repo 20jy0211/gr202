@@ -15,11 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
-<<<<<<< HEAD
 import action.common.U04;
-=======
 import action.member.U01;
->>>>>>> refs/heads/main
 import action.member.U02;
 
 @WebServlet("/MemberController")
@@ -35,13 +32,9 @@ public class MemberController extends HttpServlet {
 		 	それで、初めて実行する時だけ init()メソッドを呼び出すことで、処理速度が早くなる。
 		*/
 		super.init(config);
-<<<<<<< HEAD
-		contList.put("U02",  new U02());
-		contList.put("U04",  new U04());
-=======
 		contList.put("u01",  new U01());
 		contList.put("u02",  new U02());
->>>>>>> refs/heads/main
+		contList.put("U04",  new U04());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
