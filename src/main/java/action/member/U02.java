@@ -29,9 +29,6 @@ public class U02 implements Action {
 			dao.join(member);
 			forward.setRedirect(true);
 	           forward.setPath("index.jsp");
-				// 가입성공
-	           // 가입성공 메시지를 세션에 담는다.
-	           request.getSession().setAttribute("msg", "会員登録完了、ログインをしてから利用してください。");
 			
 			
 		}

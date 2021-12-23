@@ -51,7 +51,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher dispatcher;
-		String command = request.getParameter("action");
+		String action = request.getParameter("action");
 		String view = request.getParameter("view");
 		HttpSession session = request.getSession();
 		// パスを決めるため forward
@@ -60,7 +60,7 @@ public class MemberController extends HttpServlet {
 		String path = "/WEB-INF/view/member/";
 		try {
 			if(view == null || "".equals(view)) {
-				forward = contList.get(command).execute(request, response);
+				forward = contList.get(action).execute(request, response);
 				if (forward.isRedirect()) {
 					dispatcher = request.getRequestDispatcher(forward.getPath());
 					dispatcher.forward(request, response);
