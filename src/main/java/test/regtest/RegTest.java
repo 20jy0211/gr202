@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class RegTest {
 	String patternNum = "^[0-9]*$";
-	String patternEmail = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+	String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
 	String patternSpace = "\\s";
 	String patternString = "^[A-Za-z0-9]{0,50}$";
 	@AfterEach
@@ -15,7 +15,7 @@ class RegTest {
 	@Test
 	void test() {
 		System.out.println("111".matches(patternNum));
-		System.out.println("111".matches(patternEmail));
+		System.out.println("asd@asd.com".matches(patternEmail));
 		System.out.println("111 ".matches(patternSpace));
 		System.out.println("1dd11".matches(patternString));
 	}

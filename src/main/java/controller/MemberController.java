@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,6 @@ public class MemberController extends HttpServlet {
 		RequestDispatcher dispatcher;
 		String action = request.getParameter("action");
 		String view = request.getParameter("view");
-		HttpSession session = request.getSession();
 		// パスを決めるため forward
 		ActionForward forward = ActionForward.getInstance();
 		
@@ -63,12 +63,8 @@ public class MemberController extends HttpServlet {
 		try {
 			if(view == null || "".equals(view)) {
 				forward = contList.get(action).execute(request, response);
-				if (forward.isRedirect()) {
-					dispatcher = request.getRequestDispatcher(forward.getPath());
-					dispatcher.forward(request, response);
-				}else {
-					response.sendRedirect(forward.getPath());
-				}
+				dispatcher = request.getRequestDispatcher(path+forward.getPath());
+				dispatcher.forward(request, response);
 			}else {
 				if("index".equals(view)) {
 					forward.setPath(view+".jsp"); // webapp/index

@@ -25,7 +25,7 @@ public class MemberDAO {
 			pstmt.setString(2, member.getM_pw());
 			pstmt.setString(3, member.getM_name());
 			pstmt.setString(4, member.getM_kana());
-			pstmt.setDate(5, member.getM_brith());
+			pstmt.setString(5, member.getM_brith());
 			pstmt.setString(6, member.getM_tel());
 			pstmt.setString(7, member.getM_gender());
 			pstmt.setString(8, member.getM_zipcode());

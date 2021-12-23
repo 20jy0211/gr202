@@ -8,7 +8,7 @@ public class MemberBean {
 	private String m_pw;
 	private String m_name;
 	private String m_kana;
-	private Date m_brith;
+	private String m_brith;
 	private String m_tel;
 	private String m_gender;
 	private String m_zipcode;
@@ -23,8 +23,9 @@ public class MemberBean {
 
 	public MemberBean() {}
 
-	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, Date m_brith, String m_tel,
-			String m_gender, String m_zipcode, String m_address, int m_question_num, String m_i_num,
+
+	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, String m_brith,
+			String m_tel, String m_gender, String m_zipcode, String m_address, int m_question_num, String m_i_num,
 			String m_i_expiry_date, String m_i_mark, String m_qr_num, boolean m_auth, boolean m_leave) {
 		this.m_num = m_num;
 		this.m_email = m_email;
@@ -44,6 +45,7 @@ public class MemberBean {
 		this.m_auth = m_auth;
 		this.m_leave = m_leave;
 	}
+
 
 	public int getM_num() {
 		return m_num;
@@ -85,13 +87,12 @@ public class MemberBean {
 		this.m_kana = m_kana;
 	}
 
-
-	public Date getM_brith() {
+	public String getM_brith() {
 		return m_brith;
 	}
 
 
-	public void setM_brith(Date m_brith) {
+	public void setM_brith(String m_brith) {
 		this.m_brith = m_brith;
 	}
 
