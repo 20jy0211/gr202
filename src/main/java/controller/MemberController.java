@@ -59,7 +59,7 @@ public class MemberController extends HttpServlet {
 		
 		String path = "/WEB-INF/view/member/";
 		try {
-			if(action == null || "".equals(action)) {
+			if(view == null || "".equals(view)) {
 				forward = contList.get(action).execute(request, response);
 				if (forward.isRedirect()) {
 					dispatcher = request.getRequestDispatcher(forward.getPath());
