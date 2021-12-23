@@ -15,11 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
-<<<<<<< HEAD
-import action.common.U04;
-=======
 import action.member.U01;
->>>>>>> refs/heads/main
 import action.member.U02;
 
 @WebServlet("/MemberController")
@@ -35,13 +31,8 @@ public class MemberController extends HttpServlet {
 		 	それで、初めて実行する時だけ init()メソッドを呼び出すことで、処理速度が早くなる。
 		*/
 		super.init(config);
-<<<<<<< HEAD
-		contList.put("U02",  new U02());
-		contList.put("U04",  new U04());
-=======
 		contList.put("u01",  new U01());
 		contList.put("u02",  new U02());
->>>>>>> refs/heads/main
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -60,7 +51,7 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher dispatcher;
-		String command = request.getParameter("action");
+		String action = request.getParameter("action");
 		String view = request.getParameter("view");
 		HttpSession session = request.getSession();
 		// パスを決めるため forward
@@ -68,8 +59,8 @@ public class MemberController extends HttpServlet {
 		
 		String path = "/WEB-INF/view/member/";
 		try {
-			if(view == null || "".equals(view)) {
-				forward = contList.get(command).execute(request, response);
+			if(action == null || "".equals(action)) {
+				forward = contList.get(action).execute(request, response);
 				if (forward.isRedirect()) {
 					dispatcher = request.getRequestDispatcher(forward.getPath());
 					dispatcher.forward(request, response);
