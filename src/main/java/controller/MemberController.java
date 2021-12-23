@@ -15,10 +15,6 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
-<<<<<<< HEAD
-=======
-import action.common.U04;
->>>>>>> refs/heads/0211
 import action.member.U01;
 import action.member.U02;
 
@@ -37,10 +33,6 @@ public class MemberController extends HttpServlet {
 		super.init(config);
 		contList.put("u01",  new U01());
 		contList.put("u02",  new U02());
-<<<<<<< HEAD
-=======
-		contList.put("U04",  new U04());
->>>>>>> refs/heads/0211
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
