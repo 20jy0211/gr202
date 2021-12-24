@@ -4,7 +4,6 @@
     padding-bottom: 20px;
 }
 
-
 .registTable,.questionTable{
     margin: 3% auto;
     width: 55%;
@@ -18,7 +17,7 @@
     width: 35%;
     margin: 0 5px;
 }
-.registTitle,.questionTitle{
+.registTitle, .questionTitle{
     text-align: center;
     width: 55%;
     font-size: 20px;
@@ -54,7 +53,9 @@ th > label > span{
 }
 
 td{
+	width: 100%;
     padding: 10px 10px;
+	word-break: break-all;
 }
 
 td input[type="text"], td input[type="email"]{
@@ -67,7 +68,11 @@ input,textarea{
     margin: 0px 0px 0px 0px;
     outline: none;
 }
-
+textarea{
+	width: 100%; 
+	max-width: 20em; 
+	height: 4.8em
+}
 h3,p{
     text-align: center;
 }

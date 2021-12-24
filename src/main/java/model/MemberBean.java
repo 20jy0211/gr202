@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.Date;
 
 public class MemberBean {
 	private int m_num;
@@ -11,7 +10,7 @@ public class MemberBean {
 	private String m_brith;
 	private String m_tel;
 	private String m_gender;
-	private String m_zipcode;
+	private String m_zip_code;
 	private String m_address;
 	private int m_question_num;
 	private String m_i_num;
@@ -25,7 +24,7 @@ public class MemberBean {
 
 
 	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, String m_brith,
-			String m_tel, String m_gender, String m_zipcode, String m_address, int m_question_num, String m_i_num,
+			String m_tel, String m_gender, String m_zip_code, String m_address, int m_question_num, String m_i_num,
 			String m_i_expiry_date, String m_i_mark, String m_qr_num, boolean m_auth, boolean m_leave) {
 		this.m_num = m_num;
 		this.m_email = m_email;
@@ -35,7 +34,7 @@ public class MemberBean {
 		this.m_brith = m_brith;
 		this.m_tel = m_tel;
 		this.m_gender = m_gender;
-		this.m_zipcode = m_zipcode;
+		this.m_zip_code = m_zip_code;
 		this.m_address = m_address;
 		this.m_question_num = m_question_num;
 		this.m_i_num = m_i_num;
@@ -113,13 +112,16 @@ public class MemberBean {
 		this.m_gender = m_gender;
 	}
 
-	public String getM_zipcode() {
-		return m_zipcode;
+	
+	public String getM_zip_code() {
+		return m_zip_code;
 	}
 
-	public void setM_zipcode(String m_zipcode) {
-		this.m_zipcode = m_zipcode;
+
+	public void setM_zip_code(String m_zip_code) {
+		this.m_zip_code = m_zip_code;
 	}
+
 
 	public String getM_address() {
 		return m_address;
@@ -189,7 +191,7 @@ public class MemberBean {
 	public String toString() {
 		return "MemberBean [m_num=" + m_num + ", m_email=" + m_email + ", m_pw=" + m_pw + ", m_name=" + m_name
 				+ ", m_kana=" + m_kana + ", m_brith=" + m_brith + ", m_tel=" + m_tel + ", m_gender=" + m_gender
-				+ ", m_zipcode=" + m_zipcode + ", m_address=" + m_address + ", m_question_num=" + m_question_num
+				+ ", m_zipcode=" + m_zip_code + ", m_address=" + m_address + ", m_question_num=" + m_question_num
 				+ ", m_i_num=" + m_i_num + ", m_i_expiry_date=" + m_i_expiry_date + ", m_i_mark=" + m_i_mark
 				+ ", m_qr_num=" + m_qr_num + ", m_auth=" + m_auth + ", m_leave=" + m_leave + "]";
 	}

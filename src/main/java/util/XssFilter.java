@@ -16,7 +16,7 @@ public class XssFilter {
 				String str = map.get(key);
 				str = str.replaceAll("<", "&lt;");
 				str = str.replaceAll(">", "&gt;");
-				map.put(key, map.get(str));
+				map.put(key, str);
 			}
 		}
 		return map;
@@ -25,10 +25,10 @@ public class XssFilter {
 	public static String[] stripTagAll(String[] array){
 		int index = 0;
 		for(String str : array) {
-			if(!"".equals(str) || str != null) {
-				str = str.replaceAll("<", "&lt;");
+			if(!"".equals(str) && str != null) {
+				String str1 = str.replaceAll("<", "&lt;");
 				str = str.replaceAll(">", "&gt;");
-				array[index] = str;
+				array[index] = str1;
 			}
 			index++;
 		}

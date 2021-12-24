@@ -66,8 +66,6 @@ public class MemberController extends HttpServlet {
 				forward = contList.get(action).execute(request, response);
 				if(forward.isError()) {
 					writer.println("<script type='text/javascript'>");
-					//alertには変数が入れないから直接にalretを書くしかない。
-					writer.println("alert('"+forward.getErrorMsg()+"');");
 					writer.println("history.back();");
 					writer.println("</script>");
 					forward.setError(false);

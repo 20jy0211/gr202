@@ -98,5 +98,12 @@ public class QuestionnaireBean {
 	public void setQ_allergy(String q_allergy) {
 		this.q_allergy = q_allergy;
 	}
+
+	@Override
+	public String toString() {
+		return "QuestionnaireBean [q_num=" + q_num + ", q_blood_type=" + q_blood_type + ", q_medical_history="
+				+ q_medical_history + ", q_sick_diray=" + q_sick_diray + ", q_drug_now=" + q_drug_now + ", q_drink="
+				+ q_drink + ", q_smoke=" + q_smoke + ", q_pregnancy=" + q_pregnancy + ", q_allergy=" + q_allergy + "]";
+	}
 	
 }

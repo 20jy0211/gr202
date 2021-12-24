@@ -23,49 +23,49 @@
 	                <tr>
 	                    <th><label>メールアドレス</label></th>
 	                    <td>
-	                    	<input name="email" type="email" value="${member.m_email }" disabled>
+	                    	<c:out value="${member.m_email }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>名前</label></th>
 	                    <td>
-	                        <input name="frist_name" type="text" value="${member.m_name }" disabled>
+	                    	<c:out value="${member.m_name }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>名前(ふりがな)</label></th>
 	                    <td>
-	                        <input name="frist_kana" type="text" value="${member.m_kana }" disabled>
+	                    	<c:out value="${member.m_kana }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>性別</label></th>
 	                    <td>
-	                    	${member.gender }
+	                    	${member.m_gender }
 	                    </td>
 	                </tr>
 	                <tr class="birthday">
 	                    <th><label>生年月日</label></th>
 	                    <td>
-	                        <input type="number" name="brith" value="${member.brith }" disabled>
+	                    	<c:out value="${member.m_brith }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>電話番号</label></th>
 	                    <td>
-	                        <input name="tel" type="number" value="${member.m_tel }" disabled>
+	                    	<c:out value="${member.m_tel }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr class="postnum">
 	                    <th><label>郵便番号</label></th>
 	                    <td>
-	                        <input name="zip_code" type="number" value="${member.m_zipcode }" disabled>
+	                    	<c:out value="${member.m_zip_code }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>住所</label></th>
 	                    <td>
-	                        <input type="text" name="address" value="${member.m_address }" disabled>
+	                    	<c:out value="${member.m_address }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -73,7 +73,7 @@
 	                        <label>保険証記号</label>
 	                    </th>
 	                    <td>
-	                        <input type="text" name="insurance_mark" value="${member.m_i_mark }" disabled>
+	                    	<c:out value="${member.m_i_mark }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -81,7 +81,7 @@
 	                        <label>保険証番号</label>
 	                    </th>
 	                    <td>
-	                        <input name="insurance_num" type="number" value="${member.m_i_num }" disabled>
+	                    	<c:out value="${member.m_i_num }"></c:out>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -89,7 +89,7 @@
 	                        <label>保険証有効期限</label>
 	                    </th>
 	                    <td class="hoken_td">
-	                        <input name="insurance_expiry_date" type="number" value="${member.m_i_expiry_day }" disabled>
+	                    	<c:out value="${member.m_i_expiry_date }"></c:out>
 	                    </td>
 	                </tr>
 	            </table>
@@ -109,11 +109,7 @@
                             <label class="itemTitle">今までにかかった病気</label>
                         </th>
                         <td>
-                            <textarea name="medical_history" rows="3" cols="40"
-                                style="width: 100%; max-width: 20em; height: 4.8em" disabled>
-                        	    <c:out value="${questionnaire.q_medical_history}"></c:out>
-                            </textarea><br>
-                            <span>今までにかかったことがある病気をかいてください。</span>
+                       	    <c:out value="${questionnaire.q_medical_history}"></c:out>
                         </td>
                     </tr>
                     <tr>
@@ -121,8 +117,7 @@
                             <label class="itemTitle">服用中のお薬</label>
                         </th>
                         <td>
-                            <input type="text" name="sick_diray" size="30" value="${questionnaire.q_sick_diray }" 
-                            disabled style="width: 100%; max-width: 15em"/>
+                        	<c:out value="${questionnaire.q_sick_diray }" />
                         </td>
                     </tr>
                     <tr>
@@ -169,16 +164,13 @@
                             <label class="itemTitle">アレルギー情報</label>
                         </th>
                         <td>
-                            <textarea name="allergy" rows="3" cols="40"
-                                style="width: 100%; max-width: 20em; height: 4.8em" disabled>
-                            	<c:out value="${questionnaire.q_allergy }"></c:out>    
-                            </textarea>
+                           	<c:out value="${questionnaire.q_allergy }" />
                         </td>
                     </tr>
                 </table>
                 </div>
                 <section class="twobtns">
-                    <input type="button" onclick="location.href='history.back();'" value="戻る">
+                    <input type="button" onclick="location.href='MemberController?view=u01_01'" value="戻る">
                     <input type="button" onclick="isSubmit(form);" value="確定">
                 </section>
             </form>

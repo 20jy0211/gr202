@@ -4,7 +4,6 @@ public class ActionForward{
 	
 	private static ActionForward forward = new ActionForward();
 	private String path = null;
-	private String errorMsg = null;
 	private boolean isError = false;
 	
 	public static ActionForward getInstance(){
@@ -21,13 +20,6 @@ public class ActionForward{
 		this.path = path;
 	}
 
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
 
 	public boolean isError() {
 		return isError;
