@@ -16,56 +16,56 @@
     <main>
         <div class="contents">
             <p>入力内容をご確認いただき、お間違いなければ「確定」をクリックしてください。</p>
-            <form class="form" action="./u01_03.html" method="POST">
+            <form class="form" action="MemberController" method="POST">
+            	<input type="hidden" name="action" value="u01_02">
                 <h3 class="registTitle">入力内容確認</h3>
                 <table class="registTable" border="1">
 	                <tr>
 	                    <th><label>メールアドレス</label></th>
 	                    <td>
-	                    	<input name="email" type="email" disabled>
+	                    	<input name="email" type="email" value="${member.m_email }" disabled>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>名前</label></th>
 	                    <td>
-	                        <input name="frist_name" type="text" disabled>
+	                        <input name="frist_name" type="text" value="${member.m_name }" disabled>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>名前(ふりがな)</label></th>
 	                    <td>
-	                        <input name="frist_kana" type="text" disabled>
+	                        <input name="frist_kana" type="text" value="${member.m_kana }" disabled>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>性別</label></th>
 	                    <td>
-	                    	<!-- 性別 gender -->
+	                    	${member.gender }
 	                    </td>
 	                </tr>
 	                <tr class="birthday">
 	                    <th><label>生年月日</label></th>
 	                    <td>
-	                        <input type="number" name="brith" disabled>
+	                        <input type="number" name="brith" value="${member.brith }" disabled>
 	                    </td>
 	                </tr>
 	                <tr>
 	                    <th><label>電話番号</label></th>
 	                    <td>
-	                        <input name="tel" type="number" value="090" disabled>
+	                        <input name="tel" type="number" value="${member.m_tel }" disabled>
 	                    </td>
 	                </tr>
 	                <tr class="postnum">
 	                    <th><label>郵便番号</label></th>
 	                    <td>
-	                        <input name="zip_code" type="number" disabled>
+	                        <input name="zip_code" type="number" value="${member.m_zipcode }" disabled>
 	                    </td>
-	                </tr>
 	                </tr>
 	                <tr>
 	                    <th><label>住所</label></th>
 	                    <td>
-	                        <input type="text" name="address" disabled>
+	                        <input type="text" name="address" value="${member.m_address }" disabled>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -73,7 +73,7 @@
 	                        <label>保険証記号</label>
 	                    </th>
 	                    <td>
-	                        <input type="text" name="insurance_mark" disabled>
+	                        <input type="text" name="insurance_mark" value="${member.m_i_mark }" disabled>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -81,7 +81,7 @@
 	                        <label>保険証番号</label>
 	                    </th>
 	                    <td>
-	                        <input name="insurance_num" type="number" value="" disabled>
+	                        <input name="insurance_num" type="number" value="${member.m_i_num }" disabled>
 	                    </td>
 	                </tr>
 	                <tr>
@@ -89,7 +89,7 @@
 	                        <label>保険証有効期限</label>
 	                    </th>
 	                    <td class="hoken_td">
-	                        <input name="insurance_expiry_date" type="number" disabled>
+	                        <input name="insurance_expiry_date" type="number" value="${member.m_i_expiry_day }" disabled>
 	                    </td>
 	                </tr>
 	            </table>
@@ -101,14 +101,7 @@
                             <label class="itemTitle">血液型</label>
                         </th>
                         <td>
-                        	<!-- 下のは消す -->
-                            <select name="blood_type" disabled>
-                                <option value="0" selected>分からない</option>
-                                <option value="A">A</option>
-                                <option value="AB">AB</option>
-                                <option value="B">B</option>
-                                <option value="O">O</option>
-                            </select>
+                        	<c:out value="${questionnaire.q_blood_type }"></c:out>
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +110,9 @@
                         </th>
                         <td>
                             <textarea name="medical_history" rows="3" cols="40"
-                                style="width: 100%; max-width: 20em; height: 4.8em"></textarea disabled><br>
+                                style="width: 100%; max-width: 20em; height: 4.8em" disabled>
+                        	    <c:out value="${questionnaire.q_medical_history}"></c:out>
+                            </textarea><br>
                             <span>今までにかかったことがある病気をかいてください。</span>
                         </td>
                     </tr>
@@ -126,7 +121,8 @@
                             <label class="itemTitle">服用中のお薬</label>
                         </th>
                         <td>
-                            <input type="text" name="sick_diray" size="30" style="width: 100%; max-width: 15em" autocomplete="off" disabled/>
+                            <input type="text" name="sick_diray" size="30" value="${questionnaire.q_sick_diray }" 
+                            disabled style="width: 100%; max-width: 15em"/>
                         </td>
                     </tr>
                     <tr>
@@ -134,8 +130,12 @@
                             <label class="itemTitle">飲酒</label>
                         </th>
                         <td>
-                            <label><input type="radio" value="1" name="drink" disabled>あり</label>
-                            <label><input type="radio" value="0" name="drink" checked>なし</label>
+	                        <c:if test="${questionnaire.q_drink eq true}">
+	                            <c:out value="あり"></c:out>
+	                        </c:if>
+	                        <c:if test="${questionnaire.q_drink eq false}">
+	                            <c:out value="なし"></c:out>
+	                        </c:if>
                         </td>
                     </tr>
                     <tr>
@@ -143,8 +143,12 @@
                             <label class="itemTitle">喫煙</label>
                         </th>
                         <td>
-                            <label><input type="radio" value="1" name="smoke" disabled>あり</label>
-                            <label><input type="radio" value="0" name="smoke" checked>なし</label>
+                            <c:if test="${questionnaire.q_smoke eq true}">
+                            	<c:out value="あり"></c:out>
+                        	</c:if>
+                        	<c:if test="${questionnaire.q_smoke eq false}">
+                            	<c:out value="なし"></c:out>
+                        	</c:if>
                         </td>
                     </tr>
                     <tr>
@@ -152,9 +156,12 @@
                             <label class="itemTitle">妊娠</label>
                         </th>
                         <td>
-                            <label><input type="radio" value="" name="pregnant" disabled>あり</label>
-                            <label><input type="radio" value="" name="pregnant" checked>なし</label><br>
-                            <span>男性の方は「なし」を選択してください</span>
+                            <c:if test="${questionnaire.q_pregnancy eq true}">
+                            	<c:out value="あり"></c:out>
+                        	</c:if>
+                        	<c:if test="${questionnaire.q_pregnancy eq false}">
+                            	<c:out value="なし"></c:out>
+                        	</c:if>
                         </td>
                     </tr>
                     <tr>
@@ -163,7 +170,9 @@
                         </th>
                         <td>
                             <textarea name="allergy" rows="3" cols="40"
-                                style="width: 100%; max-width: 20em; height: 4.8em" disabled></textarea>
+                                style="width: 100%; max-width: 20em; height: 4.8em" disabled>
+                            	<c:out value="${questionnaire.q_allergy }"></c:out>    
+                            </textarea>
                         </td>
                     </tr>
                 </table>

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import action.ActionForward;
 import action.common.U04;
-import action.member.U01;
+import action.member.U01_01;
 import action.member.U02;
 
 @WebServlet("/MemberController")
@@ -33,7 +33,7 @@ public class MemberController extends HttpServlet {
 		 	それで、初めて実行する時だけ init()メソッドを呼び出すことで、処理速度が早くなる。
 		*/
 		super.init(config);
-		contList.put("u01",  new U01());
+		contList.put("u01_01",  new U01_01());
 		contList.put("u02",  new U02());
 		contList.put("u04",  new U04());
 	}
@@ -54,17 +54,28 @@ public class MemberController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher dispatcher;
+		HttpSession session = request.getSession();
+		PrintWriter writer = response.getWriter();
 		String action = request.getParameter("action");
 		String view = request.getParameter("view");
 		// パスを決めるため forward
 		ActionForward forward = ActionForward.getInstance();
-		
 		String path = "/WEB-INF/view/member/";
 		try {
 			if(view == null || "".equals(view)) {
 				forward = contList.get(action).execute(request, response);
-				dispatcher = request.getRequestDispatcher(path+forward.getPath());
-				dispatcher.forward(request, response);
+				if(forward.isError()) {
+					writer.println("<script type='text/javascript'>");
+					//alertには変数が入れないから直接にalretを書くしかない。
+					writer.println("alert('"+forward.getErrorMsg()+"');");
+					writer.println("history.back();");
+					writer.println("</script>");
+					forward.setError(false);
+					System.out.println("controller Error");
+				}else {
+					dispatcher = request.getRequestDispatcher(path+forward.getPath());
+					dispatcher.forward(request, response);
+				}
 			}else {
 				if("index".equals(view)) {
 					forward.setPath(view+".jsp"); // webapp/index

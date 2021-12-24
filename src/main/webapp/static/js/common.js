@@ -33,7 +33,6 @@ _window.on('scroll',function(){
   let nav_item = document.querySelectorAll('.menu_bar li');
   let currentMenu;
   for(let item of nav_item){
-    console.log(item);
     item.addEventListener('click',function(){
           if(item.className.indexOf('active') == -1){
             activeMenu(item);

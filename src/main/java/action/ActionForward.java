@@ -4,7 +4,8 @@ public class ActionForward{
 	
 	private static ActionForward forward = new ActionForward();
 	private String path = null;
-	private boolean redirect = false;
+	private String errorMsg = null;
+	private boolean isError = false;
 	
 	public static ActionForward getInstance(){
 		return forward;
@@ -20,13 +21,21 @@ public class ActionForward{
 		this.path = path;
 	}
 
-	public boolean isRedirect() {
-		return redirect;
+	public String getErrorMsg() {
+		return errorMsg;
 	}
 
-	public void setRedirect(boolean redirect) {
-		this.redirect = redirect;
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 
+	public boolean isError() {
+		return isError;
+	}
+
+	public void setError(boolean isError) {
+		this.isError = isError;
+	}
+	
 	
 }

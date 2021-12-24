@@ -22,7 +22,7 @@
                 入力後「確認」ボタンを押してください。
             </p>
             <form class="form" action="MemberController" method="POST">
-	            <input type="hidden" name="action" value="u01">
+	            <input type="hidden" name="action" value="u01_01">
 	            <h3 class="registTitle">新規会員登録</h3>
 	            <table class="registTable" border="1">
 	                <tr>
@@ -133,7 +133,7 @@
 	                        </th>
 	                        <td>
 	                            <select name="blood_type">
-	                                <option value="0" selected>分からない</option>
+	                                <option value="わからない" selected>分からない</option>
 	                                <option value="A">A</option>
 	                                <option value="AB">AB</option>
 	                                <option value="B">B</option>
@@ -183,8 +183,8 @@
 	                            <label class="itemTitle">妊娠</label>
 	                        </th>
 	                        <td>
-	                            <label><input type="radio" value="" name="pregnant">あり</label>
-	                            <label><input type="radio" value="" name="pregnant" checked>なし</label><br>
+	                            <label><input type="radio" value="1" name="pregnant">あり</label>
+	                            <label><input type="radio" value="0" name="pregnant" checked>なし</label><br>
 	                            <span>男性の方は「なし」を選択してください</span>
 	                        </td>
 	                    </tr>
@@ -201,7 +201,7 @@
                 </div>
                 <section class="twobtns">
                     <input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp'" value="戻る">
-                    <input type="button" onclick="isSubmit(this.form);" value="確定">
+                    <input type="submit"  value="確定">
                 </section>
             </form>
         </div>
@@ -210,5 +210,4 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/member/u01.js"></script>
 </html>

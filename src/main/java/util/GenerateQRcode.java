@@ -12,6 +12,20 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 public class GenerateQRcode {
+	private static GenerateQRcode generateQRcode = new GenerateQRcode();
+	public GenerateQRcode() {}
+	
+	public static GenerateQRcode getInstatnce() {w
+		return generateQRcode;
+	}
+	public String makeQRcode(String name) {
+		
+		return name;
+	}
+	
+	public String readQRcode(String name) {
+		return name;
+	}
 	public static void main(String[] args) {
 		QRCodeWriter write = new QRCodeWriter();
 		String path = "C:\\JSP\\QRcode";
