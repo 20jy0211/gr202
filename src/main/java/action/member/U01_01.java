@@ -25,20 +25,9 @@ public class U01_01 implements Action {
 		PrintWriter writer = response.getWriter();
 		HttpSession session = request.getSession();
 		ActionForward forward = new ActionForward();
-		String[] brith_param = request.getParameterValues("brith");
-		//history.back이 설정이 잘 안먹힘 자릿수를 맞춰주지않으면 Date에서 열외처리일어남
-		if(brith_param[0].length() < 4) {
-			forward.setError(true);
-			writer.println("<script type='text/javascript'>");
-			writer.println("alert('正しい生年月日を入力してください。');");
-			writer.println("</script>");
-			writer.close();
-			return forward;
-		}
-		if (brith_param[1].length() < 2) brith_param[1] = "0" + brith_param[1];
-		if (brith_param[2].length() < 2) brith_param[2] = "0" + brith_param[2];
 
-		String brith = brith_param[0] + "-" + brith_param[1] + "-" + brith_param[2];
+		String brith = request.getParameterValues("brith")[0] + "-" + request.getParameterValues("brith")[1] + "-"
+				+ request.getParameterValues("brith")[2];
 		String tel = request.getParameterValues("tel")[0] + "-" + request.getParameterValues("tel")[1] + "-"
 				+ request.getParameterValues("tel")[2];
 		String zip_code = request.getParameterValues("zip_code")[0] + "-" + request.getParameterValues("zip_code")[1];
@@ -64,10 +53,6 @@ public class U01_01 implements Action {
 		map.put("insurance_expiry_date", insurance_expiry_date);
 		map.put("insurance_mark", request.getParameter("insurance_mark"));
 
-		String[] pw = XssFilter.stripTagAll(request.getParameterValues("pw"));
-
-		map = XssFilter.stripTagAll(map);
-
 		/* 問診票 */
 		Map<String, String> q_map = new HashMap<String, String>();
 		q_map.put("blood_type", request.getParameter("blood_type"));
@@ -77,11 +62,14 @@ public class U01_01 implements Action {
 		q_map.put("smoke", request.getParameter("smoke"));
 		q_map.put("pregnancy", request.getParameter("pregnancy"));
 		q_map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "</br>"));
-		q_map = XssFilter.stripTagAll(q_map);
 
 		String patternNum = "^[0-9]*$";
 		String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
 		String patternString = "^[A-Za-z0-9]{8,50}$";
+
+		String[] pw = XssFilter.stripTagAll(request.getParameterValues("pw"));
+		map = XssFilter.stripTagAll(map);
+		q_map = XssFilter.stripTagAll(q_map);
 
 		// email
 		if ("".equals(map.get("email")) && map.get("email") != null) {
@@ -90,6 +78,7 @@ public class U01_01 implements Action {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('正しいメールアドレスを入力してください。');");
 				writer.println("</script>");
+				writer.close();
 				return forward;
 			}
 		}
@@ -101,6 +90,7 @@ public class U01_01 implements Action {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('入力欄には空白・スペース禁止です。');");
 				writer.println("</script>");
+				writer.close();
 				return forward;
 			}
 		}
@@ -115,17 +105,28 @@ public class U01_01 implements Action {
 						writer.println("<script type='text/javascript'>");
 						writer.println("alert('数字のみの入力欄には数字だけ入力してください。');");
 						writer.println("</script>");
+						writer.close();
 						return forward;
 					}
 				}
 			}
 		}
+		if (map.get("brith").length() < 8) {
+			forward.setError(true);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('正しい生年月日を入力してください。\n 例)1998年01月05日');");
+			writer.println("</script>");
+			writer.close();
+			return forward;
+		}
+
 		// password
 		if (pw[0] == null || pw[1] == null || "".equals(pw[0]) || "".equals(pw[1])) {
 			forward.setError(true);
 			writer.println("<script type='text/javascript'>");
 			writer.println("alert('パスワードは8文字以上を入力してください。');");
 			writer.println("</script>");
+			writer.close();
 			return forward;
 		} else {
 			if (!pw[0].equals(pw[1])) {
@@ -133,6 +134,7 @@ public class U01_01 implements Action {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('確認パスワードと一致してください。');");
 				writer.println("</script>");
+				writer.close();
 				return forward;
 			} else if (!pw[0].matches(patternString) || !pw[1].matches(patternString) || pw[0].length() < 8
 					|| pw[1].length() < 8) {
@@ -140,12 +142,14 @@ public class U01_01 implements Action {
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('パスワードは英数字のみ入力してください。');");
 				writer.println("</script>");
+				writer.close();
 				return forward;
 			} else if (pw[0].indexOf(" ") != -1 || pw[1].indexOf(" ") != -1) {
 				forward.setError(true);
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('パスワードにはスペース禁止です。');");
 				writer.println("</script>");
+				writer.close();
 				return forward;
 			}
 		}
@@ -155,6 +159,7 @@ public class U01_01 implements Action {
 			writer.println("<script type='text/javascript'>");
 			writer.println("alert('asd');");
 			writer.println("</script>");
+			writer.close();
 			return forward;
 		}
 
