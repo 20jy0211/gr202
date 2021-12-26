@@ -18,6 +18,7 @@ import action.Action;
 import action.ActionForward;
 import action.common.U04;
 import action.member.U01_01;
+import action.member.U01_02;
 import action.member.U02;
 
 @WebServlet("/MemberController")
@@ -34,6 +35,7 @@ public class MemberController extends HttpServlet {
 		*/
 		super.init(config);
 		contList.put("u01_01",  new U01_01());
+		contList.put("u01_02",  new U01_02());
 		contList.put("u02",  new U02());
 		contList.put("u04",  new U04());
 	}
@@ -59,7 +61,7 @@ public class MemberController extends HttpServlet {
 		String action = request.getParameter("action");
 		String view = request.getParameter("view");
 		// パスを決めるため forward
-		ActionForward forward = ActionForward.getInstance();
+		ActionForward forward = new ActionForward();
 		String path = "/WEB-INF/view/member/";
 		try {
 			if(view == null || "".equals(view)) {
@@ -68,6 +70,7 @@ public class MemberController extends HttpServlet {
 					writer.println("<script type='text/javascript'>");
 					writer.println("history.back();");
 					writer.println("</script>");
+					writer.close();
 					forward.setError(false);
 					System.out.println("controller Error");
 				}else {

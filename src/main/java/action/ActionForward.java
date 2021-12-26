@@ -2,15 +2,10 @@ package action;
 
 public class ActionForward{
 	
-	private static ActionForward forward = new ActionForward();
 	private String path = null;
 	private boolean isError = false;
 	
-	public static ActionForward getInstance(){
-		return forward;
-	}
-	
-	ActionForward() {}
+	public ActionForward() {}
 	
 	public String getPath() {
 		return path;

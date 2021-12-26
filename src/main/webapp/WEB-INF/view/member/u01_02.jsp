@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -109,7 +110,8 @@
                             <label class="itemTitle">今までにかかった病気</label>
                         </th>
                         <td>
-                       	    <c:out value="${questionnaire.q_medical_history}"></c:out>
+                        	<c:set var="q_medical_history" value="${fn:replace(questionnaire.q_medical_history,'&lt;/br&gt;','</br>')}" />
+                       	    <c:out value="${q_medical_history}" escapeXml="false"></c:out>
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +119,7 @@
                             <label class="itemTitle">服用中のお薬</label>
                         </th>
                         <td>
-                        	<c:out value="${questionnaire.q_sick_diray }" />
+                        	<c:out value="${questionnaire.q_medication }" />
                         </td>
                     </tr>
                     <tr>
@@ -164,13 +166,14 @@
                             <label class="itemTitle">アレルギー情報</label>
                         </th>
                         <td>
-                           	<c:out value="${questionnaire.q_allergy }" />
+                        	<c:set var="q_allergy" value="${fn:replace(questionnaire.q_allergy,'&lt;/br&gt;','</br>')}" />
+                           	<c:out value="${q_allergy }" escapeXml="false" />
                         </td>
                     </tr>
                 </table>
                 </div>
                 <section class="twobtns">
-                    <input type="button" onclick="location.href='MemberController?view=u01_01'" value="戻る">
+                    <input type="button" onclick="history.back();" value="戻る">
                     <input type="button" onclick="isSubmit(form);" value="確定">
                 </section>
             </form>

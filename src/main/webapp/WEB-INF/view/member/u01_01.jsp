@@ -22,439 +22,192 @@
                 必須項目には<strong>空白スペースを使用しないでください。</strong><br>
                 入力後「確認」ボタンを押してください。
             </p>
-            <c:if test="${member ne null }">
-	            <form class="form" action="MemberController" method="POST">
-		            <input type="hidden" name="action" value="u01_01">
-		            <h3 class="registTitle">新規会員登録</h3>
-		            	<table class="registTable" border="1">
-		                <tr>
-		                    <th><label>メールアドレス<span>(*)</span></label></th>
-		                    <td><input name="email" type="email" placeholder="denshiichiro@jec.ac.jp" value="${member.m_email }" autocomplete="off" maxlength="50" oninput="maxLengthCheck(this)"></td>
-		                </tr>
-		                <tr>
-		                    <th><label>名前<span>(*)</span></label></th>
-		                    <td>
-		                        姓<input name="frist_name" id="frist_name" type="text" placeholder="電子" value="${member.m_name.substring(0,member.m_name.indexOf(' ')) }" autocomplete="off">
-		                        名<input name="last_name" id="last_name" type="text" placeholder="一郎" value="${member.m_name.substring(member.m_name.indexOf(' '), member.m_name.length())}" autocomplete="off">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>名前(ふりがな)<span>(*)</span></label></th>
-		                    <td>
-		                        せい<input name="frist_kana" id="frist_kana" type="text" placeholder="でんし" value="${member.m_kana.substring(0,member.m_kana.indexOf(' ')) }" autocomplete="off">
-		                        めい<input name="last_kana" id="last_kana" type="text" placeholder="いちろう" value="${member.m_kana.substring(member.m_kana.indexOf(' '), member.m_kana.length())}" autocomplete="off">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>性別<span>(*)</span></label></th>
-		                    <td>
-		                    	<c:if test="${member.m_gender eq '男性' }">
-			                        <label><input type="radio" id="man" name="gender" value="男性" checked>男性</label>
-			                        <label><input type="radio" id="woman" name="gender" value="女性">女性</label>
-		                    	</c:if>
-		                    	<c:if test="${member.m_gender eq '女性' }">
-			                        <label><input type="radio" id="man" name="gender" value="男性">男性</label>
-			                        <label><input type="radio" id="woman" name="gender" value="女性" checked>女性</label>
-		                    	</c:if>
-		                    </td>
-		                </tr>
-		                <tr class="birthday">
-		                    <th><label>生年月日<span>(*)</span></label></th>
-		                    <td>
-		                    	<c:set var="brith" value="${fn:split(member.m_brith,'-')}" />
-		                        <input type="number" name="brith" placeholder="1986" autocomplete="off" value="${brith[0] }" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input type="number" name="brith" placeholder="01" autocomplete="off" value="${brith[1] }" maxlength="2" oninput="maxLengthCheck(this)">-
-		                        <input type="number" name="brith" placeholder="24" autocomplete="off" value="${brith[2] }" maxlength="2" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>電話番号<span>(*)</span></label></th>
-		                    <td>
-		                    	<c:set var="tel" value="${fn:split(member.m_tel,'-')}" />
-		                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" value="${tel[0] }" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" value="${tel[1] }" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" value="${tel[2] }" maxlength="4" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr class="postnum">
-		                    <th><label>郵便番号<span>(*)</span></label></th>
-		                    <td>
-		                    	<c:set var="zip_code" value="${fn:split(member.m_zip_code,'-')}" />
-		                        <input class="zip_code" name="zip_code" type="number" placeholder="169" autocomplete="off" value="${zip_code[0] }" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input class="zip_code" name="zip_code" type="number" placeholder="8522" autocomplete="off" value="${zip_code[1] }" maxlength="4" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>住所<span>(*)</span></label></th>
-		                    <td>
-		                        <input type="text" name="address" id="address" maxlength="150" oninput="maxLengthCheck(this)" value="${member.m_address }" placeholder="東京都新宿区百人町1-25-4" autocomplete="off">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th>
-		                        <label>保険証記号<span>(*)</span></label>
-		                    </th>
-		                    <td>
-		                        <input type="text" name="insurance_mark" placeholder="記号(戸田)" value="${member.m_i_mark }" autocomplete="off" maxlength="10" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th>
-		                        <label>保険証番号<span>(*)</span></label>
-		                    </th>
-		                    <td>
-		                    	<c:set var="m_i_num" value="${fn:split(member.m_i_num,'-')}" />
-		                        <input id="hoken2" name="insurance_num" type="number" placeholder="番号(012345)" value="${m_i_num[0] }" autocomplete="off" v maxlength="8" oninput="maxLengthCheck(this)">-
-		                        <input id="hoken1" name="insurance_num" type="number" placeholder="枝番(00)" value="${m_i_num[1] }" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
-		                        <small>保険証には６桁か８桁の「保険者番号」を入力してください。</small><br>
-		                        <small>被保険者本人は「00」です。</small>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th>
-		                        <label>保険証有効期限<span>(*)</span></label>
-		                    </th>
-		                    <td class="hoken_td">
-		                    	<c:set var="insurance_expiry_date" value="${fn:split(member.m_i_expiry_date,'-')}" />
-		                        <input name="insurance_expiry_date" type="number" placeholder="2021" value="${insurance_expiry_date[0] }" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input name="insurance_expiry_date" type="number" placeholder="12" value="${insurance_expiry_date[1] }" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)">-
-		                        <input name="insurance_expiry_date" type="number" placeholder="01" value="${insurance_expiry_date[2] }" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th rowspan="2">
-		                        <label>パスワード<span>(*)</span></label>
-		                    </th>
-		                    <td>
-		                        <input name="pw" id="pw1" type="password" placeholder="英数字８文字以上" maxlength="50" oninput="maxLengthCheck(this)" autocomplete="off"><br>
-		                        <small>最低8文字の長さが必要です</small>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <input name="pw" id="pw2" type="password" placeholder="英数字８文字以上" maxlength="50" oninput="maxLengthCheck(this)" autocomplete="off"><br>
-		                        <small>最低8文字の長さが必要です</small>
-		                    </td>
-		                </tr>
-		            </table>
-		            <div class="question-wrap">
-	               		<h3 class="questionTitle">問診表</h3>
-		                <table class="questionTable" border="1">
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">血液型</label>
-		                        </th>
-		                        <td>
-		                            <select name="blood_type">
-		                            	<c:if test="${questionnaire.q_blood_type eq 'わからない'}">
-			                                <option value="わからない" selected>分からない</option>
-			                                <option value="A">A</option>
-			                                <option value="AB">AB</option>
-			                                <option value="B">B</option>
-			                                <option value="O">O</option>
-		                            	</c:if>
-		                            	<c:if test="${questionnaire.q_blood_type eq 'A'}">
-			                                <option value="わからない">分からない</option>
-			                                <option value="A" selected>A</option>
-			                                <option value="AB">AB</option>
-			                                <option value="B">B</option>
-			                                <option value="O">O</option>
-		                            	</c:if>
-		                            	<c:if test="${questionnaire.q_blood_type eq 'AB'}">
-			                                <option value="わからない">分からない</option>
-			                                <option value="A">A</option>
-			                                <option value="AB" selected>AB</option>
-			                                <option value="B">B</option>
-			                                <option value="O">O</option>
-		                            	</c:if>
-		                            	<c:if test="${questionnaire.q_blood_type eq 'B'}">
-			                                <option value="わからない">分からない</option>
-			                                <option value="A">A</option>
-			                                <option value="AB">AB</option>
-			                                <option value="B" selected>B</option>
-			                                <option value="O">O</option>
-		                            	</c:if>
-		                            	<c:if test="${questionnaire.q_blood_type eq 'O'}">
-			                                <option value="わからない">分からない</option>
-			                                <option value="A">A</option>
-			                                <option value="AB">AB</option>
-			                                <option value="B">B</option>
-			                                <option value="O" selected>O</option>
-		                            	</c:if>
-		                            </select>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">今までにかかった病気</label>
-		                        </th>
-		                        <td>
-		                            <textarea name="medical_history" rows="3" cols="40" maxlength="200" oninput="maxLengthCheck(this)">
-		                            	${questionnaire.q_medical_history }
-		                            </textarea><br>
-		                            <span>今までにかかったことがある病気をかいてください。</span>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">服用中のお薬</label>
-		                        </th>
-		                        <td>
-		                            <input type="text" name="sick_diray" size="30" maxlength="150" oninput="maxLengthCheck(this)"
-		                            style="width: 100%; max-width: 15em" value="${questionnaire.q_sick_diray }" autocomplete="off"/>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">飲酒</label>
-		                        </th>
-		                        <td>
-		                        	<c:if test="${questionnaire.q_drink eq true }">
-			                            <label><input type="radio" value="1" name="drink" checked>あり</label>
-			                            <label><input type="radio" value="0" name="drink">なし</label>
-		                        	</c:if>
-		                        	<c:if test="${questionnaire.q_drink eq false }">
-			                            <label><input type="radio" value="1" name="drink" >あり</label>
-			                            <label><input type="radio" value="0" name="drink" checked>なし</label>
-		                        	</c:if>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">喫煙</label>
-		                        </th>
-		                        <td>
-		                        	<c:if test="${questionnaire.q_smoke eq true }">
-			                            <label><input type="radio" value="1" name="smoke" checked>あり</label>
-			                            <label><input type="radio" value="0" name="smoke">なし</label>
-		                            </c:if>
-		                            <c:if test="${questionnaire.q_smoke eq false }">
-			                            <label><input type="radio" value="1" name="smoke">あり</label>
-			                            <label><input type="radio" value="0" name="smoke" checked>なし</label>
-		                            </c:if>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">妊娠</label>
-		                        </th>
-		                        <td>
-		                        	<c:if test="${questionnaire.q_pregnancy eq true }">
-			                            <label><input type="radio" value="1" name="pregnancy" checked>あり</label>
-			                            <label><input type="radio" value="0" name="pregnancy">なし</label><br>
-		                            </c:if>
-		                            <c:if test="${questionnaire.q_pregnancy eq false }">
-			                            <label><input type="radio" value="1" name="pregnancy">あり</label>
-			                            <label><input type="radio" value="0" name="pregnancy" checked>なし</label><br>
-		                            </c:if>
-		                            <span>男性の方は「なし」を選択してください</span>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">アレルギー情報</label>
-		                        </th>
-		                        <td>
-		                            <textarea name="allergy" rows="3" cols="40" maxlength="150" oninput="maxLengthCheck(this)">
-		                            	<c:out value="${questionnaire.q_allergy }"/>	
-		                            </textarea>
-		                        </td>
-		                    </tr>
-		                </table>
-	                </div>
-	                <section class="twobtns">
-	                    <input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp'" value="戻る">
-	                    <input type="submit"  value="確定">
-	                </section>
-	            </form>
-            </c:if>
-            <c:if test="${member eq null }">
-	            <form class="form" action="MemberController" method="POST">
-		            <input type="hidden" name="action" value="u01_01">
-		            <h3 class="registTitle">新規会員登録</h3>
-		            	<table class="registTable" border="1">
-		                <tr>
-		                    <th><label>メールアドレス<span>(*)</span></label></th>
-		                    <td><input name="email" type="email" placeholder="denshiichiro@jec.ac.jp" autocomplete="off" maxlength="50" oninput="maxLengthCheck(this)"></td>
-		                </tr>
-		                <tr>
-		                    <th><label>名前<span>(*)</span></label></th>
-		                    <td>
-		                        姓<input name="frist_name" id="frist_name" type="text" placeholder="電子" autocomplete="off">
-		                        名<input name="last_name" id="last_name" type="text" placeholder="一郎" autocomplete="off">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>名前(ふりがな)<span>(*)</span></label></th>
-		                    <td>
-		                        せい<input name="frist_kana" id="frist_kana" type="text" placeholder="でんし" autocomplete="off">
-		                        めい<input name="last_kana" id="last_kana" type="text" placeholder="いちろう" autocomplete="off">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>性別<span>(*)</span></label></th>
-		                    <td>
-		                        <label><input type="radio" id="man" name="gender" value="男性" checked>男性</label>
-		                        <label><input type="radio" id="woman" name="gender" value="女性">女性</label>
-		                    </td>
-		                </tr>
-		                <tr class="birthday">
-		                    <th><label>生年月日<span>(*)</span></label></th>
-		                    <td>
-		                        <input type="number" name="brith" placeholder="1986" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input type="number" name="brith" placeholder="01" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)">-
-		                        <input type="number" name="brith" placeholder="24" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>電話番号<span>(*)</span></label></th>
-		                    <td>
-		                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr class="postnum">
-		                    <th><label>郵便番号<span>(*)</span></label></th>
-		                    <td>
-		                        <input class="zip_code" name="zip_code" type="number" placeholder="169" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input class="zip_code" name="zip_code" type="number" placeholder="8522" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th><label>住所<span>(*)</span></label></th>
-		                    <td>
-		                        <input type="text" name="address" id="address" maxlength="150" oninput="maxLengthCheck(this)" placeholder="東京都新宿区百人町1-25-4" autocomplete="off">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th>
-		                        <label>保険証記号<span>(*)</span></label>
-		                    </th>
-		                    <td>
-		                        <input type="text" name="insurance_mark" placeholder="記号(戸田)" autocomplete="off" maxlength="10" oninput="maxLengthCheck(this)">
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th>
-		                        <label>保険証番号<span>(*)</span></label>
-		                    </th>
-		                    <td>
-		                        <input id="hoken2" name="insurance_num" type="number" placeholder="番号(012345)" autocomplete="off" maxlength="8" oninput="maxLengthCheck(this)">-
-		                        <input id="hoken1" name="insurance_num" type="number" placeholder="枝番(00)" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
-		                        <small>保険証には６桁か８桁の「保険者番号」を入力してください。</small><br>
-		                        <small>被保険者本人は「00」です。</small>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th>
-		                        <label>保険証有効期限<span>(*)</span></label>
-		                    </th>
-		                    <td class="hoken_td">
-		                        <input name="insurance_expiry_date" type="number" placeholder="2021" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
-		                        <input name="insurance_expiry_date" type="number" placeholder="12" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)">-
-		                        <input name="insurance_expiry_date" type="number" placeholder="01" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <th rowspan="2">
-		                        <label>パスワード<span>(*)</span></label>
-		                    </th>
-		                    <td>
-		                        <input name="pw" id="pw1" type="password" placeholder="英数字８文字以上" maxlength="50" oninput="maxLengthCheck(this)" autocomplete="off"><br>
-		                        <small>最低8文字の長さが必要です</small>
-		                    </td>
-		                </tr>
-		                <tr>
-		                    <td>
-		                        <input name="pw" id="pw2" type="password" placeholder="英数字８文字以上" maxlength="50" oninput="maxLengthCheck(this)" autocomplete="off"><br>
-		                        <small>最低8文字の長さが必要です</small>
-		                    </td>
-		                </tr>
-		            </table>
-		            <div class="question-wrap">
-	               		<h3 class="questionTitle">問診表</h3>
-		                <table class="questionTable" border="1">
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">血液型</label>
-		                        </th>
-		                        <td>
-		                            <select name="blood_type">
-		                                <option value="わからない" selected>分からない</option>
-		                                <option value="A">A</option>
-		                                <option value="AB">AB</option>
-		                                <option value="B">B</option>
-		                                <option value="O">O</option>
-		                            </select>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">今までにかかった病気</label>
-		                        </th>
-		                        <td>
-		                            <textarea name="medical_history" rows="3" cols="40" maxlength="200" oninput="maxLengthCheck(this)"></textarea><br>
-		                            <span>今までにかかったことがある病気をかいてください。</span>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">服用中のお薬</label>
-		                        </th>
-		                        <td>
-		                            <input type="text" name="sick_diray" size="30" maxlength="150" oninput="maxLengthCheck(this)"
-		                            style="width: 100%; max-width: 15em" autocomplete="off"/>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">飲酒</label>
-		                        </th>
-		                        <td>
-		                            <label><input type="radio" value="1" name="drink" >あり</label>
-		                            <label><input type="radio" value="0" name="drink" checked>なし</label>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">喫煙</label>
-		                        </th>
-		                        <td>
-		                            <label><input type="radio" value="1" name="smoke">あり</label>
-		                            <label><input type="radio" value="0" name="smoke" checked>なし</label>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">妊娠</label>
-		                        </th>
-		                        <td>
-		                            <label><input type="radio" value="1" name="pregnant">あり</label>
-		                            <label><input type="radio" value="0" name="pregnant" checked>なし</label><br>
-		                            <span>男性の方は「なし」を選択してください</span>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <th>
-		                            <label class="itemTitle">アレルギー情報</label>
-		                        </th>
-		                        <td>
-		                            <textarea name="allergy" rows="3" cols="40" maxlength="150" oninput="maxLengthCheck(this)"></textarea>
-		                        </td>
-		                    </tr>
-		                </table>
-	                </div>
-	                <section class="twobtns">
-	                    <input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp'" value="戻る">
-	                    <input type="submit"  value="確定">
-	                </section>
-	            </form>
-            </c:if>
+            <form class="form" action="MemberController" method="POST">
+	            <input type="hidden" name="action" value="u01_01">
+	            <h3 class="registTitle">新規会員登録</h3>
+	            	<table class="registTable" border="1">
+	                <tr>
+	                    <th><label>メールアドレス<span>(*)</span></label></th>
+	                    <td><input name="email" type="email" placeholder="denshiichiro@jec.ac.jp" autocomplete="off" maxlength="50" oninput="maxLengthCheck(this)"></td>
+	                </tr>
+	                <tr>
+	                    <th><label>名前<span>(*)</span></label></th>
+	                    <td>
+	                        姓<input name="frist_name" id="frist_name" type="text" placeholder="電子" autocomplete="off">
+	                        名<input name="last_name" id="last_name" type="text" placeholder="一郎" autocomplete="off">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th><label>名前(ふりがな)<span>(*)</span></label></th>
+	                    <td>
+	                        せい<input name="frist_kana" id="frist_kana" type="text" placeholder="でんし" autocomplete="off">
+	                        めい<input name="last_kana" id="last_kana" type="text" placeholder="いちろう" autocomplete="off">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th><label>性別<span>(*)</span></label></th>
+	                    <td>
+	                        <label><input type="radio" id="man" name="gender" value="男性" checked>男性</label>
+	                        <label><input type="radio" id="woman" name="gender" value="女性">女性</label>
+	                    </td>
+	                </tr>
+	                <tr class="birthday">
+	                    <th><label>生年月日<span>(*)</span></label></th>
+	                    <td>
+	                        <input type="number" name="brith" id=brith_year placeholder="1986" min="1900" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
+	                        <input type="number" name="brith" placeholder="01" autocomplete="off" min="01" max="12" maxlength="2" oninput="maxLengthCheck(this)">-
+	                        <input type="number" name="brith" placeholder="24" autocomplete="off" min="01" max="31" maxlength="2" oninput="maxLengthCheck(this)">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th><label>電話番号<span>(*)</span></label></th>
+	                    <td>
+	                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
+	                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
+	                        <input class="phone" name="tel" type="number" placeholder="090" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">
+	                    </td>
+	                </tr>
+	                <tr class="postnum">
+	                    <th><label>郵便番号<span>(*)</span></label></th>
+	                    <td>
+	                        <input class="zip_code" name="zip_code" type="number" placeholder="169" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
+	                        <input class="zip_code" name="zip_code" type="number" placeholder="8522" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th><label>住所<span>(*)</span></label></th>
+	                    <td>
+	                        <input type="text" name="address" id="address" maxlength="150" oninput="maxLengthCheck(this)" placeholder="東京都新宿区百人町1-25-4" autocomplete="off">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th>
+	                        <label>保険証記号<span>(*)</span></label>
+	                    </th>
+	                    <td>
+	                        <input type="text" name="insurance_mark" placeholder="記号(戸田)" autocomplete="off" maxlength="10" oninput="maxLengthCheck(this)">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th>
+	                        <label>保険証番号<span>(*)</span></label>
+	                    </th>
+	                    <td>
+	                        <input id="hoken2" name="insurance_num" type="number" placeholder="番号(012345)" autocomplete="off" maxlength="8" oninput="maxLengthCheck(this)">-
+	                        <input id="hoken1" name="insurance_num" type="number" placeholder="枝番(00)" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
+	                        <small>保険証には６桁か８桁の「保険者番号」を入力してください。</small><br>
+	                        <small>被保険者本人は「00」です。</small>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th>
+	                        <label>保険証有効期限<span>(*)</span></label>
+	                    </th>
+	                    <td class="hoken_td">
+	                        <input name="insurance_expiry_date" type="number" placeholder="2021" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
+	                        <input name="insurance_expiry_date" type="number" placeholder="12" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)">-
+	                        <input name="insurance_expiry_date" type="number" placeholder="01" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <th rowspan="2">
+	                        <label>パスワード<span>(*)</span></label>
+	                    </th>
+	                    <td>
+	                        <input name="pw" id="pw1" type="password" placeholder="英数字８文字以上" maxlength="50" oninput="maxLengthCheck(this)" autocomplete="off"><br>
+	                        <small>最低8文字の長さが必要です</small>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td>
+	                        <input name="pw" id="pw2" type="password" placeholder="英数字８文字以上" maxlength="50" oninput="maxLengthCheck(this)" autocomplete="off"><br>
+	                        <small>最低8文字の長さが必要です</small>
+	                    </td>
+	                </tr>
+	            </table>
+	            <div class="question-wrap">
+               		<h3 class="questionTitle">問診表</h3>
+	                <table class="questionTable" border="1">
+	                    <tr>
+	                        <th>
+	                            <label class="itemTitle">血液型</label>
+	                        </th>
+	                        <td>
+	                            <select name="blood_type">
+	                                <option value="" selected>分からない</option>
+	                                <option value="A">A</option>
+	                                <option value="AB">AB</option>
+	                                <option value="B">B</option>
+	                                <option value="O">O</option>
+	                            </select>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>
+	                            <label class="itemTitle">今までにかかった病気</label>
+	                        </th>
+	                        <td>
+	                            <textarea name="medical_history" rows="3" cols="40" maxlength="200" oninput="maxLengthCheck(this)"></textarea><br>
+	                            <span>今までにかかったことがある病気をかいてください。</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>
+	                            <label class="itemTitle">服用中のお薬</label>
+	                        </th>
+	                        <td>
+	                            <input type="text" name="medication" size="30" maxlength="150" oninput="maxLengthCheck(this)"
+	                            style="width: 100%; max-width: 15em" autocomplete="off"/>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>
+	                            <label class="itemTitle">飲酒</label>
+	                        </th>
+	                        <td>
+	                            <label><input type="radio" value="1" name="drink" >あり</label>
+	                            <label><input type="radio" value="0" name="drink" checked>なし</label>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>
+	                            <label class="itemTitle">喫煙</label>
+	                        </th>
+	                        <td>
+	                            <label><input type="radio" value="1" name="smoke">あり</label>
+	                            <label><input type="radio" value="0" name="smoke" checked>なし</label>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>
+	                            <label class="itemTitle">妊娠</label>
+	                        </th>
+	                        <td>
+	                            <label><input type="radio" value="1" name="pregnant">あり</label>
+	                            <label><input type="radio" value="0" name="pregnant" checked>なし</label><br>
+	                            <span>男性の方は「なし」を選択してください</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <th>
+	                            <label class="itemTitle">アレルギー情報</label>
+	                        </th>
+	                        <td>
+	                            <textarea name="allergy" rows="3" cols="40" maxlength="150" oninput="maxLengthCheck(this)"></textarea>
+	                        </td>
+	                    </tr>
+	                </table>
+                </div>
+                <section class="twobtns">
+                    <input type="button" onclick="location.href='${pageContext.request.contextPath}/index.jsp'" value="戻る">
+                    <input type="button" onclick="isSubmit(form);" value="確定">
+                </section>
+            </form>
         </div>
     </main>
     <jsp:include page="../common/footer.jsp"/>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/member/u01.js"></script>
 </html>

@@ -1,6 +1,8 @@
 package action.member;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +24,21 @@ public class U01_01 implements Action {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter writer = response.getWriter();
 		HttpSession session = request.getSession();
-		ActionForward forward = ActionForward.getInstance();
+		ActionForward forward = new ActionForward();
+		String[] brith_param = request.getParameterValues("brith");
+		//history.back이 설정이 잘 안먹힘 자릿수를 맞춰주지않으면 Date에서 열외처리일어남
+		if(brith_param[0].length() < 4) {
+			forward.setError(true);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('正しい生年月日を入力してください。');");
+			writer.println("</script>");
+			writer.close();
+			return forward;
+		}
+		if (brith_param[1].length() < 2) brith_param[1] = "0" + brith_param[1];
+		if (brith_param[2].length() < 2) brith_param[2] = "0" + brith_param[2];
 
-		String brith = request.getParameterValues("brith")[0] + "-" + request.getParameterValues("brith")[1] + "-"
-				+ request.getParameterValues("brith")[2];
+		String brith = brith_param[0] + "-" + brith_param[1] + "-" + brith_param[2];
 		String tel = request.getParameterValues("tel")[0] + "-" + request.getParameterValues("tel")[1] + "-"
 				+ request.getParameterValues("tel")[2];
 		String zip_code = request.getParameterValues("zip_code")[0] + "-" + request.getParameterValues("zip_code")[1];
@@ -38,10 +51,10 @@ public class U01_01 implements Action {
 		/* 会員情報 */
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", request.getParameter("email"));
-		map.put("frist_name", request.getParameter("frist_name"));
-		map.put("last_name", request.getParameter("last_name"));
-		map.put("frist_kana", request.getParameter("frist_kana"));
-		map.put("last_kana", request.getParameter("last_kana"));
+		map.put("frist_name", request.getParameter("frist_name").replaceAll(" ", ""));
+		map.put("last_name", request.getParameter("last_name").replaceAll(" ", ""));
+		map.put("frist_kana", request.getParameter("frist_kana").replaceAll(" ", ""));
+		map.put("last_kana", request.getParameter("last_kana").replaceAll(" ", ""));
 		map.put("brith", brith);
 		map.put("tel", tel);
 		map.put("gender", request.getParameter("gender"));
@@ -58,12 +71,12 @@ public class U01_01 implements Action {
 		/* 問診票 */
 		Map<String, String> q_map = new HashMap<String, String>();
 		q_map.put("blood_type", request.getParameter("blood_type"));
-		q_map.put("medical_history", request.getParameter("medical_history"));
-		q_map.put("sick_diray", request.getParameter("sick_diray"));
+		q_map.put("medical_history", request.getParameter("medical_history").replaceAll("\r\n", "</br>"));
+		q_map.put("medication", request.getParameter("medication").replaceAll("\r\n", "</br>"));
 		q_map.put("drink", request.getParameter("drink"));
 		q_map.put("smoke", request.getParameter("smoke"));
 		q_map.put("pregnancy", request.getParameter("pregnancy"));
-		q_map.put("allergy", request.getParameter("allergy"));
+		q_map.put("allergy", request.getParameter("allergy").replaceAll("\r\n", "</br>"));
 		q_map = XssFilter.stripTagAll(q_map);
 
 		String patternNum = "^[0-9]*$";
@@ -128,7 +141,7 @@ public class U01_01 implements Action {
 				writer.println("alert('パスワードは英数字のみ入力してください。');");
 				writer.println("</script>");
 				return forward;
-			}else if(pw[0].indexOf(" ") != -1 || pw[1].indexOf(" ") != -1) {
+			} else if (pw[0].indexOf(" ") != -1 || pw[1].indexOf(" ") != -1) {
 				forward.setError(true);
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('パスワードにはスペース禁止です。');");
@@ -144,6 +157,7 @@ public class U01_01 implements Action {
 			writer.println("</script>");
 			return forward;
 		}
+
 		/* 会員情報 */
 		MemberBean member = new MemberBean();
 		member.setM_email(map.get("email"));
@@ -163,7 +177,7 @@ public class U01_01 implements Action {
 		QuestionnaireBean questionnaire = new QuestionnaireBean();
 		questionnaire.setQ_blood_type(q_map.get("blood_type"));
 		questionnaire.setQ_medical_history(q_map.get("medical_history"));
-		questionnaire.setQ_sick_diray(q_map.get("sick_diray"));
+		questionnaire.setQ_medication(q_map.get("medication"));
 		questionnaire.setQ_drink("1".equals(q_map.get("drink")) ? true : false);
 		questionnaire.setQ_smoke("1".equals(q_map.get("smoke")) ? true : false);
 		questionnaire.setQ_pregnancy("1".equals(q_map.get("pregnancy")) ? true : false);
@@ -173,8 +187,6 @@ public class U01_01 implements Action {
 
 		forward.setPath("u01_02.jsp");
 		session.setAttribute("member", member);
-		System.out.println(member.toString());
-		System.out.println(questionnaire.toString());
 		return forward;
 
 	}
