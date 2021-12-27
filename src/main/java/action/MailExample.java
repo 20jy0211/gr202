@@ -2,19 +2,6 @@ package action;
 
 public class MailExample {
 	UserDAO userDAO = new UserDAO();
-	String userID = null;
-	if(session.getAttribute("userID") != null){
-		userID = (String) session.getAttribute("userID");
-	}
-	if(userID == null){
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('ログインをしてください。')");
-		script.println("location.href = 'userLogin.jsp");
-		script.println("</script>");
-		script.close();
-		return;
-	}
 	boolean emailChecked = userDAO.getUserEmailChecked(userID);
 	if(emailChecked == true){
 		PrintWriter script = response.getWriter();

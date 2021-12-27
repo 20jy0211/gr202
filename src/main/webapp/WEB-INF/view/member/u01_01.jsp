@@ -183,8 +183,8 @@
 	                            <label class="itemTitle">妊娠</label>
 	                        </th>
 	                        <td>
-	                            <label><input type="radio" value="1" name="pregnant">あり</label>
-	                            <label><input type="radio" value="0" name="pregnant" checked>なし</label><br>
+	                            <label><input type="radio" value="1" name="pregnancy">あり</label>
+	                            <label><input type="radio" value="0" name="pregnancy" checked>なし</label><br>
 	                            <span>男性の方は「なし」を選択してください</span>
 	                        </td>
 	                    </tr>

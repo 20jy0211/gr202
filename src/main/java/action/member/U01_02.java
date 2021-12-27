@@ -12,6 +12,7 @@ import dao.MemberDAO;
 import dao.QuestionnaireDAO;
 import model.MemberBean;
 import model.QuestionnaireBean;
+import util.Gmail;
 
 public class U01_02 implements Action {
 
@@ -37,7 +38,7 @@ public class U01_02 implements Action {
 			writer.close();
 			return forward;
 		}
-		
+		int m_num = memberDAO.getM_num(member.getM_email());
 		/* questionnaire */
 		questionnaire.setQ_num(memberDAO.getM_num(member.getM_email()));
 		if(!new QuestionnaireDAO().createQuestionnaire(questionnaire)) {
@@ -48,15 +49,24 @@ public class U01_02 implements Action {
 			writer.close();
 			return forward;
 		}
-//		member.setM_qr_num(memberDAO.generateQRcode(member.getM_num(), member.getM_brith()));
-//		if(member.getM_qr_num() == null) {
-//			forward.setError(true);
-//			writer.println("<script type='text/javascript'>");
-//			writer.println("alert('QRコード登録のエラーが発生しました。');");
-//			writer.println("</script>");
-//			writer.close();
-//			return forward;
-//		}
+		if(!memberDAO.updateM_questionnaire_Num(m_num,questionnaire.getQ_num())) {
+			forward.setError(true);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('会員の問診票番号登録のエラーが発生しました。');");
+			writer.println("</script>");
+			writer.close();
+			return forward;
+		}
+		if(!Gmail.sendAuthMain(member.getM_email())) {
+			forward.setError(true);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('認証メール送信のエラーが発生しました。');");
+			writer.println("</script>");
+			writer.close();
+			return forward;
+		}
+		session.invalidate();
+		
 		forward.setPath("u01_03.jsp");
 		return forward;
 	}

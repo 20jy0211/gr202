@@ -5,12 +5,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 import model.MemberBean;
 import util.Close;
 import util.DBconnection;
 import util.GenerateQRcode;
+import util.SHA256;
 
 public class MemberDAO {
 	
@@ -60,8 +60,8 @@ public class MemberDAO {
 			conn = DBconnection.getConnection();
 			conn.setAutoCommit(false);
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, member.getM_email());
-			pstmt.setString(2, member.getM_pw());
+			pstmt.setString(1,SHA256.getEncrypt(member.getM_email()));
+			pstmt.setString(2, SHA256.getEncrypt(member.getM_pw()));
 			pstmt.setString(3, member.getM_name());
 			pstmt.setString(4, member.getM_kana());
 			pstmt.setDate(5, brith);
@@ -98,7 +98,7 @@ public class MemberDAO {
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, m_email);
+			pstmt.setString(1, SHA256.getEncrypt(m_email));
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				return rs.getInt(1);
@@ -124,11 +124,11 @@ public class MemberDAO {
 		try {
 			conn = DBconnection.getConnection();
 			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1, m_email);
+			pstmt.setString(1, SHA256.getEncrypt(m_email));
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				//ユーザが書いたpwとDBのpwと同じだったらログイン成功
-				if(rs.getString(1).equals(m_pw)) {
+				if(rs.getString("m_pw").equals(SHA256.getEncrypt(m_pw))) {
 					return true;
 				}
 			}
@@ -140,8 +140,90 @@ public class MemberDAO {
 			} catch (Exception e) {
 				throw new RuntimeException(e.getMessage());
 			}
-		} // end try~catch
+		}
 		return false;
 	}
+	public boolean isAuth(String m_email) {
+		String SQL = "SELECT m_auth FROM member WHERE m_email = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBconnection.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, SHA256.getEncrypt(m_email));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return rs.getBoolean("m_auth");
+			}
+		}catch (Exception e) {
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+		return false;
+	}
+	public boolean updateAuth(String m_email) throws SQLException{
+		String SQL = "UPDATE member SET m_auth = true WHERE m_email = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, SHA256.getEncrypt(m_email));
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		}catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (Exception e) {
+			conn.rollback();
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public boolean updateM_questionnaire_Num(int m_num,int questionnaire_num) throws SQLException{
+		String SQL = "UPDATE member SET m_question_num = ? WHERE m_num = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBconnection.getConnection();
+			conn.setAutoCommit(false);
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, questionnaire_num);
+			pstmt.setInt(2, m_num);
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		}catch (SQLException sqle) {
+			conn.rollback();
+			throw new RuntimeException(sqle.getMessage());
+		} catch (Exception e) {
+			conn.rollback();
+			throw new RuntimeException(e.getMessage());
+		}finally {
+			try {
+				Close.close(conn, pstmt, rs);
+			} catch (Exception e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
 	
 }
