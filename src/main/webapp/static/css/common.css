@@ -55,7 +55,7 @@ form{
 }
 
 nav{
-    width:100%;
+    width: 90%;
 }
 nav ul{
     display: flex;
@@ -130,25 +130,36 @@ nav ul li .menu_a_active{
     padding: 0.5em 1em;
     text-decoration: none;
     background: #f7f7f7;
-    border-left: solid 6px #3c485e;/*左線*/
-    color: #3c485e;/*文字色*/
+    border-left: solid 6px #3c485e;/*蟾ｦ邱�*/
+    color: #3c485e;/*譁�蟄苓牡*/
     font-weight: bold;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
     transition: all 0.5s;
 }
+.member_box{
+	width: 100%;
+}
+.member_box span{
+	font-size: 0.8rem;
+	font-weight: bold;
+}
+.member_name.transform{
+	color:white;
+}
+
 .logout_btn{
-    margin-top: 10px;
     width: 80px;
-    height: 20px;
-    display: inline-block;
+    height: 15px;
+    display: flex;
     padding: 0.5em 1em;
     text-decoration: none;
     background: #f7f7f7;
-    border-left: solid 6px #3c485e;/*左線*/
-    color: #3c485e;/*文字色*/
+    border-left: solid 6px #3c485e;/*蟾ｦ邱�*/
+    color: #3c485e;/*譁�蟄苓牡*/
     font-weight: bold;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
     transition: all 0.5s;
+    font-size: 12px;
 }
 .login_btn:active, .singup_btn:active, .logout_btn:active{
     box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
@@ -196,7 +207,7 @@ nav ul li .menu_a_active{
     transition: all 0.5s;
 }
 
-/*Xを表示する*/
+/*X繧定｡ｨ遉ｺ縺吶ｋ*/
 .account-btn span,
 .account-btn span:before,
 .account-btn span:after {
@@ -234,12 +245,12 @@ nav ul li .menu_a_active{
 #account-btn-check {
     display: none;
 }
-/*メニューオープン時は真ん中の線を透明にする*/
+/*繝｡繝九Η繝ｼ繧ｪ繝ｼ繝励Φ譎ゅ�ｯ逵溘ｓ荳ｭ縺ｮ邱壹ｒ騾乗�弱↓縺吶ｋ*/
 #account-btn-check:checked ~ .account-btn span {
     background-color: rgba(255, 255, 255, 0);
     cursor: pointer;
 }
-/*Xの線*/
+/*X縺ｮ邱�*/
 #account-btn-check:checked ~ .account-btn span::before {
     bottom: 0;
     transform: rotate(45deg);
@@ -266,7 +277,7 @@ nav ul li .menu_a_active{
 }
 
 #account-btn-check:checked ~ .account-content {
-    left: 0;/*メニューを画面内へ*/
+    left: 0;/*繝｡繝九Η繝ｼ繧堤判髱｢蜀�縺ｸ*/
 }
 .account-content ul {
     padding: 70px 10px 0;
@@ -402,7 +413,7 @@ h2{
         display: flex;
         cursor: pointer;
     }
-    .login_btn, .singup_btn, .logout_btn{
+    .login_btn, .singup_btn, .member_box{
         display: none;
     }
     .footer_link{

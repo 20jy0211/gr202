@@ -30,7 +30,7 @@ public class U01_02 implements Action {
 		
 		
 		MemberDAO memberDAO = new MemberDAO();
-		if(!memberDAO.join(member)) {
+		if(!memberDAO.singUp(member)) {
 			forward.setError(true);
 			writer.println("<script type='text/javascript'>");
 			writer.println("alert('会員登録のエラーが発生しました。');");
@@ -49,7 +49,7 @@ public class U01_02 implements Action {
 			writer.close();
 			return forward;
 		}
-		if(!memberDAO.updateM_questionnaire_Num(m_num,questionnaire.getQ_num())) {
+		if(!memberDAO.updateM_q_Num(m_num,questionnaire.getQ_num())) {
 			forward.setError(true);
 			writer.println("<script type='text/javascript'>");
 			writer.println("alert('会員の問診票番号登録のエラーが発生しました。');");
@@ -57,17 +57,18 @@ public class U01_02 implements Action {
 			writer.close();
 			return forward;
 		}
-		if(!Gmail.sendAuthMain(member.getM_email())) {
+		Gmail gmail = Gmail.getInstance();
+		if(!gmail.sendSingUpMail(member.getM_email(), member.getM_name())) {
 			forward.setError(true);
 			writer.println("<script type='text/javascript'>");
-			writer.println("alert('認証メール送信のエラーが発生しました。');");
+			writer.println("alert('認証メール送信のエラーが発生しました。\nログインすることでもう一度認証メールが送られます。');");
 			writer.println("</script>");
 			writer.close();
 			return forward;
 		}
 		session.invalidate();
 		
-		forward.setPath("u01_03.jsp");
+		forward.setPath("u01_03");
 		return forward;
 	}
 

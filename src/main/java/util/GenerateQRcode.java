@@ -22,8 +22,9 @@ public class GenerateQRcode {
 			if(!file.exists()) { 
 		   	 	file.mkdirs(); 
 			} 
-			String fileName = m_brith.substring(0,4) + String.valueOf(m_num);
-			fileName = new String(fileName.getBytes("UTF-8"));
+			String qr_num = m_brith.substring(0,4) + String.valueOf(m_num);
+			byte[] bytes = qr_num.getBytes("UTF-8");
+			String fileName = new String(bytes);
 			//
 			BitMatrix bitMatrix = write.encode(fileName, BarcodeFormat.QR_CODE, 400, 400);
 			//qrcodeColor, backgroundColor

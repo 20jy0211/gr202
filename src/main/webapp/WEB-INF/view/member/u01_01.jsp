@@ -22,7 +22,7 @@
                 必須項目には<strong>空白スペースを使用しないでください。</strong><br>
                 入力後「確認」ボタンを押してください。
             </p>
-            <form class="form" action="MemberController" method="POST">
+            <form class="form" action="NonMemberController" method="POST">
 	            <input type="hidden" name="action" value="u01_01">
 	            <h3 class="registTitle">新規会員登録</h3>
 	            	<table class="registTable" border="1">
@@ -77,7 +77,7 @@
 	                <tr>
 	                    <th><label>住所<span>(*)</span></label></th>
 	                    <td>
-	                        <input type="text" name="address" id="address" maxlength="150" oninput="maxLengthCheck(this)" placeholder="東京都新宿区百人町1-25-4" autocomplete="off">
+	                        <input type="text" name="address" id="address" maxlength="150" placeholder="東京都新宿区百人町1-25-4" autocomplete="off">
 	                    </td>
 	                </tr>
 	                <tr>
@@ -104,9 +104,9 @@
 	                        <label>保険証有効期限<span>(*)</span></label>
 	                    </th>
 	                    <td class="hoken_td">
-	                        <input name="insurance_expiry_date" type="number" placeholder="2021" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
+	                        <input name="insurance_expiry_date" type="number" placeholder="2023" autocomplete="off" maxlength="4" oninput="maxLengthCheck(this)">-
 	                        <input name="insurance_expiry_date" type="number" placeholder="12" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)">-
-	                        <input name="insurance_expiry_date" type="number" placeholder="01" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
+	                        <input name="insurance_expiry_date" type="number" placeholder="09" autocomplete="off" maxlength="2" oninput="maxLengthCheck(this)"><br>
 	                    </td>
 	                </tr>
 	                <tr>

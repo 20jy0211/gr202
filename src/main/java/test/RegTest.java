@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class RegTest {
 	String patternNum = "^[0-9]*$";
 	String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
-	String patternString = "^[A-Za-z0-9]{0,50}$";
+	String patternString = "^[A-Za-z0-9]{0,64}$";
 	@AfterEach
 	void tearDown() throws Exception {
 	}

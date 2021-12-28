@@ -18,11 +18,13 @@
             <div class="registFinish">
                 <p>
                     ご入力いただいたメールアドレスに確認メールを送信しました。<br>
-                    メールに記載されているＵＲＬにアクセスしご登録を完了してください。
+                    メールに記載されているＵＲＬにアクセスしご登録を完了してください。<br>
+                    ※5分以内に認証メールが送信されていない場合はログインすることで、<br>
+                    認証メールが再発行されます。
                 </p>
             </div>
             <section class="finishBtn">
-                <input type="button" onclick="location.href='MemberController?view=index'" value="トップページへ">
+                <input type="button" onclick="location.href='NonMemberController?view=u02'" value="ログイン画面へ">
             </section>
         </div>
 

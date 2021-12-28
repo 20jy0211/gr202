@@ -19,7 +19,7 @@
         <div class="account-content">
             <h2>ログインしてから利用できます。</h2>
             <ul>
-                <li><a href="../member/u02_01.jsp">ログアウト</a></li>
+                <li><a href="../member/u04.jsp">ログアウト</a></li>
                 <li><a href="${pageContext.request.contextPath}/index.html" >ホーム</a></li>
 	            <li><a href="./m4_01.jsp">会員検索</a></li>
 	            <li><a href="./m1_01.jsp">医者一覧</a></li>

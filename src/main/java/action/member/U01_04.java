@@ -24,7 +24,7 @@ public class U01_04 implements Action {
 		System.out.println(m_email);
 		MemberDAO memberDAO = new MemberDAO();
 		if(memberDAO.isAuth(m_email)) {
-			forward.setPath("u02_01.jsp");
+			forward.setPath("u02");
 			writer.println("<script type='text/javascript'>");
 			writer.println("alert('既にメールアドレスの認証がされています。');");
 			writer.println("</script>");
@@ -39,10 +39,18 @@ public class U01_04 implements Action {
 			writer.close();
 			return forward;
 		}
-		MemberBean member = new MemberBean();
+		String[] m_numANDm_brith = memberDAO.findbyEmailToM_numAndBrith(m_email);
+		if(!memberDAO.generateQRcode(Integer.parseInt(m_numANDm_brith[0]), m_numANDm_brith[1])) {
+			forward.setError(true);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('QRコード登録のエラーが発生しました。\n管理者に問い合わせしてください。');");
+			writer.println("</script>");
+			writer.close();
+			return forward;
+		}
 		
 		
-		forward.setPath("u01_04.jsp");
+		forward.setPath("u01_04");
 		return forward;
 	}
 

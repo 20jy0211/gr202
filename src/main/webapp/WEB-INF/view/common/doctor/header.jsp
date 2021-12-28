@@ -20,7 +20,7 @@
                 <li><a href="DoctorController?view=index" >ホーム</a></li>
 	            <li><a href="./u10_01_doctor.jsp">会員検索</a></li>
 	            <li><a href="./u06_01_doctor.jsp">マイページ</a></li>
-                <li><a href="../member/u02_01.jsp">ログアウト</a></li>
+                <li><a href="../member/u04.jsp">ログアウト</a></li>
             </ul>
         </div>
         <a href="../member/u04.jsp" class="logout_btn">ログアウト</a><br>

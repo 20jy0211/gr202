@@ -17,7 +17,7 @@
     <main>
         <div class="contents">
             <p>入力内容をご確認いただき、お間違いなければ「確定」をクリックしてください。</p>
-            <form class="form" action="MemberController" method="POST">
+            <form class="form" action="NonMemberController" method="POST">
             	<input type="hidden" name="action" value="u01_02">
                 <h3 class="registTitle">入力内容確認</h3>
                 <table class="registTable" border="1">

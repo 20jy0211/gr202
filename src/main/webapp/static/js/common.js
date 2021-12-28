@@ -6,7 +6,8 @@ var _window = $(window),
     account_menu = $('.account-btn'),
     singup_btn = $('.singup_btn'),
     login_btn = $('.login_btn'),
-    logout_btn = $('.logout_btn');
+    logout_btn = $('.logout_btn'),
+	member_name = $('.member_name');
 
 _window.on('scroll',function(){
     if(_window.scrollTop() > 20){
@@ -16,7 +17,8 @@ _window.on('scroll',function(){
         account_menu.addClass('transform');
         singup_btn.addClass('transform');
         login_btn.addClass('transform');   
-        logout_btn.addClass('transform');   
+        logout_btn.addClass('transform');
+		member_name.addClass('transform');
     }
     else{
         _header.removeClass('transform');   
@@ -26,6 +28,7 @@ _window.on('scroll',function(){
         singup_btn.removeClass('transform');
         login_btn.removeClass('transform');  
         logout_btn.removeClass('transform');  
+		member_name.removeClass('transform');  
     }
     
   });

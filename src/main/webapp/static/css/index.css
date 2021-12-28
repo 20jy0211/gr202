@@ -40,7 +40,8 @@
     text-align: center;
 }
 .item_box img{
-    width: 80%;
+    width: 100%;
+    background-color: black;
 }
 .wrap_info_con{
     background-color: white;

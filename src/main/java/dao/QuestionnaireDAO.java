@@ -14,7 +14,7 @@ public class QuestionnaireDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 
-	public QuestionnaireBean getQuestionnaire(int m_question_num) throws SQLException{
+	public QuestionnaireBean getQuestionnaire(int m_q_num) throws SQLException{
 		String SQL = "SELECT * FROM questionnaire WHERE q_num = ?";
 		try {
 

@@ -38,7 +38,7 @@ input{
     transition: all .2s ease;
 }
  input.form-style{
-  color:#8a8a8a;
+  color:black;
   display: block;
   width: 90%;
   height: 44px;
@@ -58,7 +58,7 @@ input{
 .form-item .form-style:focus{
     outline: none; 
     border:1px solid #58bff6; 
-    color:#58bff6; 
+    color:black; 
 }
 .form-item p.formLabel {
   position: absolute;

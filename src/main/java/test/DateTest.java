@@ -15,7 +15,9 @@ class DateTest {
 	void test() {
 		String brith = "2022-12-01";
 		Date date = Date.valueOf(brith);
+		String dateToString = date.toString();
 		System.out.println(date);
+		System.out.println(dateToString);
 	}
 
 }

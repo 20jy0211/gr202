@@ -15,7 +15,7 @@
                 </div>
                 <div class="info_text">
                     <p>
-                        電子お薬手帳は<a href="MemberController?view=u01_01">会員登録</a>(無料)してから利用できます。<br>
+                        電子お薬手帳は<a href="NonMemberController?view=u01_01">会員登録</a>(無料)してから利用できます。<br>
                     </p>
                 </div>
                 <div class="item_box">
@@ -27,7 +27,7 @@
                             <span>QRコード画像を保存したい</span>
                         </div>
                         <div class="manual_text">
-                            <span>1.<a href="MemberController?view=u02">My QRコード</a>
+                            <span>1.<a href="NonMemberController?view=u02">My QRコード</a>
                                 にアクセス</span><br>
                             <span>2.QRコードを送信ボタンを押す。</span><br>
                             <span>3.登録したメールにQRコード画像が送られます。</span><br>
@@ -48,7 +48,7 @@
                         <div class="manual_text">
                             <span>1.まず子供登録する必要があります。<br></span>
                             <span>
-                                <a href="MemberController?view=u02">子供情報</a>
+                                <a href="NonMemberController?view=u02">子供情報</a>
                                 にアクセスしてください。
                             </span><br>
                             <span>2.子供を登録する。</span><br>
@@ -65,14 +65,14 @@
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="MemberController?view=u02">My QRコード</a><br>
+                    <a class="item_title" href="NonMemberController?view=u02">My QRコード</a><br>
                     <p>
                         自分のQRコードが確認できます。<br>
                         QRコード画像をメールアドレスに送られます。
                     </p>
                 </div>
                 <div class="menu_item_box">
-                    <a class="item_title" href='MemberController?view=u02'>マイページ</a><br>
+                    <a class="item_title" href='NonMemberController?view=u02'>マイページ</a><br>
                     <p>
                         個人情報の確認・変更・退会<br>
                         問診票の変更ができます。
@@ -81,13 +81,13 @@
             </div>
             <div class="menu_items">
                 <div class="menu_item_box">
-                    <a class="item_title" href="MemberController?view=u02">子供情報</a><br>
+                    <a class="item_title" href="NonMemberController?view=u02">子供情報</a><br>
                     <p>
                         子供情報の登録・変更・削除ができます。
                     </p>
                 </div>
                 <div class="menu_item_box">
-                    <a class="item_title" href="MemberController?view=u02">薬歴</a><br>
+                    <a class="item_title" href="NonMemberController?view=u02">薬歴</a><br>
                        <p>過去の薬歴が表示されます。</p>
                 </div>
             </div>

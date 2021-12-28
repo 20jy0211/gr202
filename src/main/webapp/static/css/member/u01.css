@@ -4,6 +4,7 @@
     padding-bottom: 20px;
 }
 
+
 .registTable,.questionTable{
     margin: 3% auto;
     width: 55%;
@@ -17,8 +18,7 @@
     width: 35%;
     margin: 0 5px;
 }
-.registTitle, .questionTitle{
-    text-align: center;
+.registTitle,.questionTitle{
     width: 55%;
     font-size: 20px;
     line-height: 1.6em;
@@ -34,6 +34,10 @@
     text-shadow: 1px 1px 1px #555555;
 }
 
+.registTable input:disabled, .registTable textarea:disabled, .registTable select:disabled{
+    color:black;
+    background-color: white;
+}
 .phone{
     width: 20%;
 }
@@ -53,9 +57,7 @@ th > label > span{
 }
 
 td{
-	width: 100%;
     padding: 10px 10px;
-	word-break: break-all;
 }
 
 td input[type="text"], td input[type="email"]{
@@ -68,11 +70,7 @@ input,textarea{
     margin: 0px 0px 0px 0px;
     outline: none;
 }
-textarea{
-	width: 100%; 
-	max-width: 20em; 
-	height: 4.8em
-}
+
 h3,p{
     text-align: center;
 }
@@ -92,7 +90,7 @@ strong{
 .registFinish p{
     text-align: center;
 }
-.hoken_td input[type="number"]{
+.hoken_td input[type="number"], .hoken_td input[type="number"]:disabled{
     width: 20%;
 }
 #hoken1, #hoken2{

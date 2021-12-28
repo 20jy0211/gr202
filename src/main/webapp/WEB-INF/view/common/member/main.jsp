@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <main>
     <div class="notice_con">
         <span>お知らせ</span>
@@ -11,10 +12,10 @@
         <section class="qr_item">
             <div class="item_box">
                 <div class="subtitle"><h2>My QRコード</h2></div>
-                <img src="${pageContext.request.contextPath}/static/img/qr_code/123dsa.png" alt="QRコード">
+                <img src="${pageContext.request.contextPath}/static/img/qr_code/${member.m_qr_num}.png" alt="My QRコード" >
             </div>
             <div class="qr_text">
-                <span>1234-1234-1234-1234</span>
+                <span>${member.m_qr_num}</span>
             </div>
         </section>
         <div class="wrap_info_con">
@@ -49,7 +50,7 @@
                         <div class="manual_text">
                             <span>1.まず子供登録する必要があります。<br></span>
                             <span>
-                                <a href="MemberController?view=u02">子供情報</a>
+                                <a href="MemberController?view=u07_01">子供情報</a>
                                 にアクセスしてください。
                             </span><br>
                             <span>2.子供を登録する。</span><br>

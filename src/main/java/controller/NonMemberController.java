@@ -16,14 +16,15 @@ import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
-import action.common.U04;
 import action.member.U01_01;
 import action.member.U01_02;
 import action.member.U01_04;
 import action.member.U02;
+import action.member.U03_02;
+import action.member.U03_03;
 
-@WebServlet("/MemberController")
-public class MemberController extends HttpServlet {
+@WebServlet("/NonMemberController")
+public class NonMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	// ポリモーフィズムのため action
 	private Map<String, Action> contList = new HashMap<>();
@@ -35,7 +36,12 @@ public class MemberController extends HttpServlet {
 		 	それで、初めて実行する時だけ init()メソッドを呼び出すことで、処理速度が早くなる。
 		*/
 		super.init(config);
-		contList.put("u04",  new U04());
+		contList.put("u01_01",  new U01_01());
+		contList.put("u01_02",  new U01_02());
+		contList.put("u01_04",  new U01_04());
+		contList.put("u02",  new U02());
+		contList.put("u03_02",  new U03_02());
+		contList.put("u03_03",  new U03_03());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -92,5 +98,4 @@ public class MemberController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }

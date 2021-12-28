@@ -40,10 +40,10 @@ public class U01_01 implements Action {
 		/* 会員情報 */
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", request.getParameter("email"));
-		map.put("frist_name", request.getParameter("frist_name").replaceAll(" ", ""));
-		map.put("last_name", request.getParameter("last_name").replaceAll(" ", ""));
-		map.put("frist_kana", request.getParameter("frist_kana").replaceAll(" ", ""));
-		map.put("last_kana", request.getParameter("last_kana").replaceAll(" ", ""));
+		map.put("frist_name", request.getParameter("frist_name").replaceAll("\\t", ""));
+		map.put("last_name", request.getParameter("last_name").replaceAll("\\t", ""));
+		map.put("frist_kana", request.getParameter("frist_kana").replaceAll("\\t", ""));
+		map.put("last_kana", request.getParameter("last_kana").replaceAll("\\t", ""));
 		map.put("brith", brith);
 		map.put("tel", tel);
 		map.put("gender", request.getParameter("gender"));
@@ -65,27 +65,25 @@ public class U01_01 implements Action {
 
 		String patternNum = "^[0-9]*$";
 		String patternEmail = "\\w+@\\w+\\.\\w+(\\.\\w+)?";
-		String patternString = "^[A-Za-z0-9]{8,50}$";
+		String patternPw = "^[A-Za-z0-9]{8,64}$";
 
 		String[] pw = XssFilter.stripTagAll(request.getParameterValues("pw"));
 		map = XssFilter.stripTagAll(map);
 		q_map = XssFilter.stripTagAll(q_map);
 
 		// email
-		if ("".equals(map.get("email")) && map.get("email") != null) {
-			if (!map.get("email").matches(patternEmail)) {
-				forward.setError(true);
-				writer.println("<script type='text/javascript'>");
-				writer.println("alert('正しいメールアドレスを入力してください。');");
-				writer.println("</script>");
-				writer.close();
-				return forward;
-			}
+		if (!map.get("email").matches(patternEmail)) {
+			forward.setError(true);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('正しいメールアドレスを入力してください。');");
+			writer.println("</script>");
+			writer.close();
+			return forward;
 		}
 
 		// input text type
 		for (String ary : map.keySet()) {
-			if ("".equals(map.get(ary)) || map.get(ary) == null || "".equals(map.get(ary).replaceAll(" ", ""))) {
+			if ("".equals(map.get(ary)) || map.get(ary) == null || "".equals(map.get(ary).replaceAll("\\t", ""))) {
 				forward.setError(true);
 				writer.println("<script type='text/javascript'>");
 				writer.println("alert('入力欄には空白・スペース禁止です。');");
@@ -100,7 +98,7 @@ public class U01_01 implements Action {
 			if (!"".equals(value) && value != null) {
 				if (value.indexOf("-") != -1) {
 					value = value.replaceAll("-", "");
-					if (!value.matches(patternNum) && "".equals(value.replaceAll(" ", ""))) {
+					if (!value.matches(patternNum) && "".equals(value.replaceAll("\\t", ""))) {
 						forward.setError(true);
 						writer.println("<script type='text/javascript'>");
 						writer.println("alert('数字のみの入力欄には数字だけ入力してください。');");
@@ -111,7 +109,15 @@ public class U01_01 implements Action {
 				}
 			}
 		}
-		if (map.get("brith").length() < 8) {
+		if (map.get("brith").length() != 10) {
+			forward.setError(true);
+			writer.println("<script type='text/javascript'>");
+			writer.println("alert('正しい生年月日を入力してください。\n 例)1998年01月05日');");
+			writer.println("</script>");
+			writer.close();
+			return forward;
+		}
+		if (map.get("insurance_expiry_date").length() != 10) {
 			forward.setError(true);
 			writer.println("<script type='text/javascript'>");
 			writer.println("alert('正しい生年月日を入力してください。\n 例)1998年01月05日');");
@@ -136,7 +142,7 @@ public class U01_01 implements Action {
 				writer.println("</script>");
 				writer.close();
 				return forward;
-			} else if (!pw[0].matches(patternString) || !pw[1].matches(patternString) || pw[0].length() < 8
+			} else if (!pw[0].matches(patternPw) || !pw[1].matches(patternPw) || pw[0].length() < 8
 					|| pw[1].length() < 8) {
 				forward.setError(true);
 				writer.println("<script type='text/javascript'>");
@@ -190,7 +196,7 @@ public class U01_01 implements Action {
 
 		session.setAttribute("questionnaire", questionnaire);
 
-		forward.setPath("u01_02.jsp");
+		forward.setPath("u01_02");
 		session.setAttribute("member", member);
 		return forward;
 

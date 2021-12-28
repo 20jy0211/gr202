@@ -11,7 +11,7 @@ public class MemberBean {
 	private String m_gender;
 	private String m_zip_code;
 	private String m_address;
-	private int m_question_num;
+	private int m_q_num;
 	private String m_i_num;
 	private String m_i_expiry_date;
 	private String m_i_mark;
@@ -21,8 +21,10 @@ public class MemberBean {
 
 	public MemberBean() {}
 
+
+
 	public MemberBean(int m_num, String m_email, String m_pw, String m_name, String m_kana, String m_brith,
-			String m_tel, String m_gender, String m_zip_code, String m_address, int m_question_num, String m_i_num,
+			String m_tel, String m_gender, String m_zip_code, String m_address, int m_q_num, String m_i_num,
 			String m_i_expiry_date, String m_i_mark, String m_qr_num, boolean m_auth, boolean m_leave) {
 		super();
 		this.m_num = m_num;
@@ -35,7 +37,7 @@ public class MemberBean {
 		this.m_gender = m_gender;
 		this.m_zip_code = m_zip_code;
 		this.m_address = m_address;
-		this.m_question_num = m_question_num;
+		this.m_q_num = m_q_num;
 		this.m_i_num = m_i_num;
 		this.m_i_expiry_date = m_i_expiry_date;
 		this.m_i_mark = m_i_mark;
@@ -43,6 +45,7 @@ public class MemberBean {
 		this.m_auth = m_auth;
 		this.m_leave = m_leave;
 	}
+
 
 
 	public int getM_num() {
@@ -129,13 +132,18 @@ public class MemberBean {
 		this.m_address = m_address;
 	}
 
-	public int getM_question_num() {
-		return m_question_num;
+
+	public int getM_q_num() {
+		return m_q_num;
 	}
 
-	public void setM_question_num(int m_question_num) {
-		this.m_question_num = m_question_num;
+
+
+	public void setM_q_num(int m_q_num) {
+		this.m_q_num = m_q_num;
 	}
+
+
 
 	public String getM_i_num() {
 		return m_i_num;
@@ -185,13 +193,16 @@ public class MemberBean {
 		this.m_leave = m_leave;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "MemberBean [m_num=" + m_num + ", m_email=" + m_email + ", m_pw=" + m_pw + ", m_name=" + m_name
 				+ ", m_kana=" + m_kana + ", m_brith=" + m_brith + ", m_tel=" + m_tel + ", m_gender=" + m_gender
-				+ ", m_zipcode=" + m_zip_code + ", m_address=" + m_address + ", m_question_num=" + m_question_num
-				+ ", m_i_num=" + m_i_num + ", m_i_expiry_date=" + m_i_expiry_date + ", m_i_mark=" + m_i_mark
-				+ ", m_qr_num=" + m_qr_num + ", m_auth=" + m_auth + ", m_leave=" + m_leave + "]";
+				+ ", m_zip_code=" + m_zip_code + ", m_address=" + m_address + ", m_q_num=" + m_q_num + ", m_i_num="
+				+ m_i_num + ", m_i_expiry_date=" + m_i_expiry_date + ", m_i_mark=" + m_i_mark + ", m_qr_num=" + m_qr_num
+				+ ", m_auth=" + m_auth + ", m_leave=" + m_leave + "]";
 	}
+
 
 }

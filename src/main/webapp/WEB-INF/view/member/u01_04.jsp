@@ -19,7 +19,7 @@
                 <p>登録が完了しました。ログインしてから利用可能です。</p>
             </div>
             <section class="finishBtn">
-                <input type="button" onclick="location.href='MemberController?view=u02_01'" value="ログイン画面へ">
+                <input type="button" onclick="location.href='NonMemberController?view=u02'" value="ログイン画面へ">
             </section>
         </div>
     </main>
